@@ -19,7 +19,7 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return new NewsFeedFragment();
+        return NewsFeedFragment.newInstance();
     }
 
     @Override
