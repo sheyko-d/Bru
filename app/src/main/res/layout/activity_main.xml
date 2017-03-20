@@ -19,7 +19,18 @@
             android:elevation="4dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            tools:targetApi="lollipop" />
+            tools:targetApi="lollipop">
+
+            <TextView
+                fontPath="fonts/Comfortaa-Bold.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/app_name"
+                android:textColor="@android:color/white"
+                android:textSize="28sp"
+                tools:ignore="MissingPrefix" />
+        </android.support.v7.widget.Toolbar>
     </LinearLayout>
 
     <!-- The navigation drawer -->
