@@ -3,6 +3,8 @@ package com.moyersoftware.bru.main;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.moyersoftware.bru.R;
+import com.moyersoftware.bru.main.adapter.MainPagerAdapter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -23,6 +26,10 @@ public class MainActivity extends AppCompatActivity {
     Toolbar mToolbar;
     @Bind(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
+    @Bind(R.id.pager)
+    ViewPager mPager;
+    @Bind(R.id.tab_layout)
+    TabLayout mTabLayout;
 
     private ActionBarDrawerToggle mDrawerToggle;
 
@@ -34,6 +41,12 @@ public class MainActivity extends AppCompatActivity {
 
         initActionBar();
         initNavigationDrawer();
+        initPager();
+    }
+
+    private void initPager() {
+        mPager.setAdapter(new MainPagerAdapter(getSupportFragmentManager()));
+        mTabLayout.setupWithViewPager(mPager);
     }
 
     /**

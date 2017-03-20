@@ -31,6 +31,24 @@
                 android:textSize="28sp"
                 tools:ignore="MissingPrefix" />
         </android.support.v7.widget.Toolbar>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:background="@color/colorPrimary"
+            android:elevation="4dp"
+            app:tabIndicatorColor="@color/tab_text_color"
+            app:tabIndicatorHeight="3dp"
+            app:tabSelectedTextColor="@android:color/white"
+            app:tabTextAppearance="@style/TabLayoutTextStyle"
+            app:tabTextColor="@android:color/white"
+            tools:targetApi="lollipop" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </LinearLayout>
 
     <!-- The navigation drawer -->
