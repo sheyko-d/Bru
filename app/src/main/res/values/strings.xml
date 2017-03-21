@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">brü</string>
+    <string name="news_feed">news feed</string>
+    <string name="on_tap">on tap</string>
+    <string name="settings">settings</string>
+    <string name="log_out">log out</string>
 </resources>
