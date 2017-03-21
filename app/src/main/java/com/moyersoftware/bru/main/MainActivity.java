@@ -2,6 +2,7 @@ package com.moyersoftware.bru.main;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -12,6 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.moyersoftware.bru.R;
 import com.moyersoftware.bru.main.adapter.MainPagerAdapter;
@@ -47,6 +50,31 @@ public class MainActivity extends AppCompatActivity {
     private void initPager() {
         mPager.setAdapter(new MainPagerAdapter(getSupportFragmentManager()));
         mTabLayout.setupWithViewPager(mPager);
+        updateTabStyle(0);
+        mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset,
+                                       int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                updateTabStyle(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
+    }
+
+    private void updateTabStyle(int pos) {
+        TextView tv = (TextView) (((LinearLayout) ((LinearLayout) mTabLayout.getChildAt(0))
+                .getChildAt(pos == 1 ? 1 : 0)).getChildAt(1));
+        tv.setTypeface(null, Typeface.BOLD);
+        tv = (TextView) (((LinearLayout) ((LinearLayout) mTabLayout.getChildAt(0))
+                .getChildAt(pos == 1 ? 0 : 1)).getChildAt(1));
+        tv.setTypeface(null, Typeface.NORMAL);
     }
 
     /**
