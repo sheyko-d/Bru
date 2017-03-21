@@ -1,7 +1,7 @@
 package com.moyersoftware.bru.main.data;
 
 /**
- * Immutable model class for a Friend.
+ * Immutable model class for a News Feed item.
  */
 public final class NewsFeed {
 

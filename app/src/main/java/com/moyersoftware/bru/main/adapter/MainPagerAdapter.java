@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import com.moyersoftware.bru.R;
 import com.moyersoftware.bru.app.BruApp;
 import com.moyersoftware.bru.main.NewsFeedFragment;
+import com.moyersoftware.bru.main.OnTapFragment;
 
 public class MainPagerAdapter extends FragmentStatePagerAdapter {
 
@@ -19,7 +20,11 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return NewsFeedFragment.newInstance();
+        if (position == 0) {
+            return NewsFeedFragment.newInstance();
+        } else {
+            return OnTapFragment.newInstance();
+        }
     }
 
     @Override
