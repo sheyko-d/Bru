@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
     View mDrawerOnTap;
     @Bind(R.id.drawer_settings)
     View mDrawerSettings;
+    @Bind(R.id.log_in)
+    TextView mLogIn;
 
     private ActionBarDrawerToggle mDrawerToggle;
 
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!Util.isLoggedIn()){
+                if (!Util.isLoggedIn()) {
                     Toast.makeText(MainActivity.this, R.string.access_denied, Toast.LENGTH_SHORT)
                             .show();
                     finish();
@@ -156,6 +158,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 mDrawerLayout.closeDrawers();
                 mPager.setCurrentItem(1);
+            }
+        });
+
+        mLogIn.setText(Util.isLoggedIn() ? R.string.log_out : R.string.log_in);
+        mLogIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
             }
         });
     }

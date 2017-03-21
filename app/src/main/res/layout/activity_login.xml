@@ -26,7 +26,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="24dp"
             android:orientation="vertical">
 
             <EditText
@@ -63,25 +63,88 @@
                 fontPath="fonts/Roboto-Bold.ttf"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
-                android:layout_marginTop="48dp"
+                android:layout_marginTop="16dp"
                 android:onClick="onLoginButtonClicked"
                 android:stateListAnimator="@null"
                 android:text="@string/login_submit"
                 android:textColor="@color/colorAccent"
                 android:textSize="16sp"
-                android:theme="@style/Button_Host" />
+                android:theme="@style/Button_Host"
+                tools:targetApi="lollipop" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:alpha="0.5"
+                    android:background="@android:color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="48dp"
+                    android:layout_marginRight="48dp"
+                    android:text="@string/or"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:alpha="0.5"
+                    android:background="@android:color/white" />
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/sign_up"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="24dp"
+                fontPath="fonts/Roboto-Bold.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
                 android:background="?selectableItemBackground"
                 android:clickable="true"
-                android:gravity="center"
-                android:text="@string/create_an_account"
+                android:drawableLeft="@drawable/facebook"
+                android:drawablePadding="16dp"
+                android:drawableStart="@drawable/facebook"
+                android:paddingBottom="16dp"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp"
+                android:paddingTop="16dp"
+                android:text="@string/connect_with_facebook"
                 android:textColor="@android:color/white"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
         </LinearLayout>
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="48dp"
+        android:background="@android:color/white" />
+
+    <TextView
+        android:id="@+id/sign_up"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="24dp"
+        android:background="?selectableItemBackground"
+        android:clickable="true"
+        android:gravity="center"
+        android:text="@string/create_an_account"
+        android:textColor="@android:color/white"
+        android:textSize="14sp" />
 </FrameLayout>

@@ -142,6 +142,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/log_in"
             fontPath="fonts/Comfortaa-Regular.ttf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -153,7 +154,7 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:paddingTop="8dp"
-            android:text="@string/log_out"
+            android:text="@string/log_in"
             android:textColor="@color/primary_text"
             android:textSize="16sp"
             tools:ignore="MissingPrefix" />

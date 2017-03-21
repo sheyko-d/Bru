@@ -67,4 +67,8 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(new Intent(this, MainActivity.class));
         super.onBackPressed();
     }
+
+    public void onLoginButtonClicked(View view) {
+
+    }
 }
