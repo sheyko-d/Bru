@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:lineSpacingExtra="4dp"
-        android:textColor="@color/primary_text"
+        android:textColor="@color/secondary_text"
         android:textSize="14sp"
         tools:text="$3.80 / can" />
 

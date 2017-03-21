@@ -1,6 +1,7 @@
 package com.moyersoftware.bru.main;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -18,7 +19,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.moyersoftware.bru.R;
+import com.moyersoftware.bru.auth.LoginActivity;
 import com.moyersoftware.bru.main.adapter.MainPagerAdapter;
+import com.moyersoftware.bru.util.Util;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -54,6 +57,20 @@ public class MainActivity extends AppCompatActivity {
         initActionBar();
         initNavigationDrawer();
         initPager();
+        initFab();
+    }
+
+    private void initFab() {
+        mFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!Util.isLoggedIn()){
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                } else {
+                    // TODO: Show add news layout
+                }
+            }
+        });
     }
 
     private void initPager() {

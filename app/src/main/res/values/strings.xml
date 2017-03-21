@@ -4,4 +4,8 @@
     <string name="on_tap">on tap</string>
     <string name="settings">settings</string>
     <string name="log_out">log out</string>
+    <string name="login_email">Email</string>
+    <string name="login_password">Password</string>
+    <string name="login_submit">Sign in</string>
+    <string name="create_an_account">Don\'t have an account? Sign up!</string>
 </resources>
