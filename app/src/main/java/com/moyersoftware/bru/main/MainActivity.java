@@ -36,6 +36,12 @@ public class MainActivity extends AppCompatActivity {
     TabLayout mTabLayout;
     @Bind(R.id.fab)
     FloatingActionButton mFab;
+    @Bind(R.id.drawer_news_feed)
+    View mDrawerNewsFeed;
+    @Bind(R.id.drawer_on_tap)
+    View mDrawerOnTap;
+    @Bind(R.id.drawer_settings)
+    View mDrawerSettings;
 
     private ActionBarDrawerToggle mDrawerToggle;
 
@@ -116,6 +122,21 @@ public class MainActivity extends AppCompatActivity {
 
         // Set the drawer toggle as the DrawerListener
         mDrawerLayout.addDrawerListener(mDrawerToggle);
+
+        mDrawerNewsFeed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDrawerLayout.closeDrawers();
+                mPager.setCurrentItem(0);
+            }
+        });
+        mDrawerOnTap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDrawerLayout.closeDrawers();
+                mPager.setCurrentItem(1);
+            }
+        });
     }
 
     @Override
