@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.moyersoftware.bru.R;
 import com.moyersoftware.bru.auth.LoginActivity;
@@ -65,6 +66,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!Util.isLoggedIn()){
+                    Toast.makeText(MainActivity.this, R.string.access_denied, Toast.LENGTH_SHORT)
+                            .show();
+                    finish();
                     startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 } else {
                     // TODO: Show add news layout
