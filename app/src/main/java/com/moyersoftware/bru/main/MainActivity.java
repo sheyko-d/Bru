@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     ViewPager mPager;
     @Bind(R.id.tab_layout)
     TabLayout mTabLayout;
+    @Bind(R.id.fab)
+    FloatingActionButton mFab;
 
     private ActionBarDrawerToggle mDrawerToggle;
 
@@ -60,6 +63,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 updateTabStyle(position);
+                if (position == 0) {
+                    mFab.show();
+                } else {
+                    mFab.hide();
+                }
             }
 
             @Override
