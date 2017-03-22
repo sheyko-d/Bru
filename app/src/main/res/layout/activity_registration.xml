@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:orientation="vertical"
+        android:paddingBottom="48dp"
         android:paddingLeft="36dp"
         android:paddingRight="36dp">
 
@@ -30,7 +31,7 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/login_email_edit_txt"
+                android:id="@+id/login_name_edit_txt"
                 style="@style/EditText.Light"
                 fontPath="fonts/Roboto-Medium.ttf"
                 android:layout_width="match_parent"
@@ -38,6 +39,21 @@
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
                 android:layout_marginTop="24dp"
+                android:drawableLeft="@drawable/login_name"
+                android:drawablePadding="16dp"
+                android:drawableStart="@drawable/login_name"
+                android:hint="@string/login_name"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/login_email_edit_txt"
+                style="@style/EditText.Light"
+                fontPath="fonts/Roboto-Medium.ttf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginTop="16dp"
                 android:drawableLeft="@drawable/login_email"
                 android:drawablePadding="16dp"
                 android:drawableStart="@drawable/login_email"
@@ -59,73 +75,33 @@
                 android:hint="@string/login_password"
                 android:inputType="textPassword" />
 
+            <EditText
+                android:id="@+id/login_repeat_password_edit_txt"
+                style="@style/EditText.Light"
+                fontPath="fonts/Roboto-Medium.ttf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginTop="16dp"
+                android:drawableLeft="@drawable/login_password"
+                android:drawablePadding="16dp"
+                android:drawableStart="@drawable/login_password"
+                android:hint="@string/login_repeat_password"
+                android:inputType="textPassword" />
+
             <Button
                 fontPath="fonts/Roboto-Medium.ttf"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:layout_marginTop="16dp"
-                android:onClick="onLoginButtonClicked"
+                android:onClick="onRegistrationButtonClicked"
                 android:stateListAnimator="@null"
-                android:text="@string/login_submit"
+                android:text="@string/registration_submit"
                 android:textColor="@color/colorAccent"
                 android:textSize="14sp"
                 android:theme="@style/Button_Host"
                 tools:targetApi="lollipop" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:layout_marginTop="24dp"
-                android:orientation="horizontal">
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:alpha="0.5"
-                    android:background="@android:color/white" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="48dp"
-                    android:layout_marginRight="48dp"
-                    android:text="@string/or"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:alpha="0.5"
-                    android:background="@android:color/white" />
-            </LinearLayout>
-
-            <TextView
-                fontPath="fonts/Roboto-Bold.ttf"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="16dp"
-                android:onClick="onFacebookButtonClicked"
-                android:background="?selectableItemBackground"
-                android:clickable="true"
-                android:drawableLeft="@drawable/facebook"
-                android:drawablePadding="16dp"
-                android:drawableStart="@drawable/facebook"
-                android:paddingBottom="16dp"
-                android:paddingLeft="24dp"
-                android:paddingRight="24dp"
-                android:paddingTop="16dp"
-                android:text="@string/connect_with_facebook"
-                android:textColor="@android:color/white"
-                android:textSize="16sp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -137,16 +113,16 @@
         android:background="@android:color/white" />
 
     <TextView
-        android:id="@+id/sign_up"
+        android:id="@+id/sign_in"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_gravity="bottom"
         android:layout_marginTop="24dp"
         android:background="?selectableItemBackground"
-        android:onClick="onRegistrationButtonClicked"
         android:clickable="true"
         android:gravity="center"
-        android:text="@string/create_an_account"
+        android:onClick="onLoginButtonClicked"
+        android:text="@string/log_in_account"
         android:textColor="@android:color/white"
         android:textSize="14sp" />
 </FrameLayout>

@@ -14,4 +14,8 @@
     <string name="log_in">log in</string>
     <string name="or">or</string>
     <string name="connect_with_facebook">Connect with Facebook</string>
+    <string name="log_in_account">Already have an account? Sign in</string>
+    <string name="login_name">Your name</string>
+    <string name="login_repeat_password">Repeat password</string>
+    <string name="registration_submit">Create an account</string>
 </resources>

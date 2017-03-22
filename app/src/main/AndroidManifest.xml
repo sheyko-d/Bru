@@ -11,7 +11,6 @@
         android:fullBackupContent="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
@@ -23,6 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".user.LoginActivity" />
+        <activity android:name=".user.RegistrationActivity" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

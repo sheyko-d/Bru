@@ -2,16 +2,20 @@ package com.moyersoftware.bru.util;
 
 import android.content.res.Resources;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
+import com.google.gson.Gson;
 import com.moyersoftware.bru.app.BruApp;
+import com.moyersoftware.bru.user.model.Profile;
 
 public class Util {
 
     private static final String LOG_TAG = "BruDebug";
     public static final String BASE_API_URL = "";
     public static final int DEBUG_MAX_LENGTH = 500;
+    private static final String PREF_PROFILE = "Profile";
 
     /**
      * Adds a message to LogCat.
@@ -33,7 +37,7 @@ public class Util {
      * Checks if user is logged in.
      */
     public static boolean isLoggedIn() {
-        return false;
+        return getProfile() != null;
     }
 
     /**
@@ -59,5 +63,21 @@ public class Util {
                     + DEBUG_MAX_LENGTH));
             i += DEBUG_MAX_LENGTH;
         }
+    }
+
+    /**
+     * Saves the profile of the logged in user in preferences.
+     */
+    public static void setProfile(Profile profile) {
+        PreferenceManager.getDefaultSharedPreferences(BruApp.getContext()).edit()
+                .putString(PREF_PROFILE, new Gson().toJson(profile)).apply();
+    }
+
+    /**
+     * Retrieves the profile of the logged in user from preferences.
+     */
+    public static Profile getProfile() {
+        return new Gson().fromJson(PreferenceManager.getDefaultSharedPreferences
+                (BruApp.getContext()).getString(PREF_PROFILE, null), Profile.class);
     }
 }

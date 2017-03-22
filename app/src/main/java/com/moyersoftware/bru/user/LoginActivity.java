@@ -21,6 +21,7 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.moyersoftware.bru.R;
 import com.moyersoftware.bru.main.MainActivity;
+import com.moyersoftware.bru.user.model.Profile;
 import com.moyersoftware.bru.util.Util;
 
 import org.json.JSONException;
@@ -38,9 +39,6 @@ public class LoginActivity extends AppCompatActivity {
     TextView mSignUp;
 
     private CallbackManager mCallbackManager;
-    private String mName;
-    private String mPhoto;
-    private String mEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +95,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void initFacebook() {
         mCallbackManager = CallbackManager.Factory.create();
+        Util.setProfile(null);
         LoginManager.getInstance().logOut();
         LoginManager.getInstance().registerCallback(mCallbackManager,
                 new FacebookCallback<LoginResult>() {
@@ -110,14 +109,14 @@ public class LoginActivity extends AppCompatActivity {
                                             Util.Log("Can't retrieve Facebook info");
                                         } else {
                                             try {
-                                                mName = response.getJSONObject()
+                                                String name = response.getJSONObject()
                                                         .get("name").toString();
-                                                mPhoto = "https://graph.facebook.com/"
+                                                String photo = "https://graph.facebook.com/"
                                                         + response.getJSONObject()
                                                         .get("id").toString() + "/picture?type=large";
-                                                mEmail = response.getJSONObject()
+                                                String email = response.getJSONObject()
                                                         .get("email").toString();
-                                                Util.Log("Logged in");
+                                                signInOnServer(name, photo, email);
                                             } catch (JSONException e) {
                                                 Util.Log("Can't retrieve Facebook name: " + e
                                                         + ", " + me.toString());
@@ -144,9 +143,22 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
+    private void signInOnServer(String name, String photo, String email) {
+        String id = "1";
+        Profile profile = new Profile(id, name, photo, email);
+        Util.setProfile(profile);
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public void onRegistrationButtonClicked(View view) {
+        startActivity(new Intent(this, RegistrationActivity.class));
+        finish();
     }
 }

@@ -169,6 +169,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
             }
         });
+
+        mDrawerSettings.setVisibility(Util.isLoggedIn() ? View.VISIBLE : View.GONE);
     }
 
     @Override
