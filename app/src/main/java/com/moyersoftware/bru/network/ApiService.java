@@ -18,7 +18,12 @@ public interface ApiService {
 
     @FormUrlEncoded
     @POST("user/register.php")
-    Call<Profile> register(@Field("name") String names,
+    Call<Profile> register(@Field("name") String name,
                            @Field("email") String email,
                            @Field("password") String password);
+
+    @FormUrlEncoded
+    @POST("user/login.php")
+    Call<Profile> login(@Field("email") String email,
+                        @Field("password") String password);
 }

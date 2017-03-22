@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
+import android.text.TextUtils;
 import android.text.style.UnderlineSpan;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +43,10 @@ public class LoginActivity extends AppCompatActivity {
 
     @Bind(R.id.sign_up)
     TextView mSignUp;
+    @Bind(R.id.email)
+    EditText mEmail;
+    @Bind(R.id.password)
+    EditText mPassword;
 
     private CallbackManager mCallbackManager;
 
@@ -90,6 +96,34 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onLoginButtonClicked(View view) {
+        if (TextUtils.isEmpty(mEmail.getText()) || TextUtils.isEmpty(mPassword.getText())) {
+            Toast.makeText(this, "Not all fields are filled in.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Call<Profile> call = ApiFactory.getApiService().login
+                (mEmail.getText().toString(), mPassword.getText().toString());
+        call.enqueue(new Callback<Profile>() {
+            @Override
+            public void onResponse(Call<Profile> call,
+                                   Response<Profile> response) {
+                Profile profile = response.body();
+                if (profile != null) {
+                    Util.setProfile(profile);
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    finish();
+                } else {
+                    Toast.makeText(LoginActivity.this, "Incorrect email or password.",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Profile> call, Throwable t) {
+                Toast.makeText(LoginActivity.this, "Incorrect email or password.",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void onFacebookButtonClicked(View view) {
