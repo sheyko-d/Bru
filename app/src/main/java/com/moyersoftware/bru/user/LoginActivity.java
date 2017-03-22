@@ -21,6 +21,7 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.moyersoftware.bru.R;
 import com.moyersoftware.bru.main.MainActivity;
+import com.moyersoftware.bru.network.ApiFactory;
 import com.moyersoftware.bru.user.model.Profile;
 import com.moyersoftware.bru.util.Util;
 
@@ -31,6 +32,9 @@ import java.util.Collections;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class LoginActivity extends AppCompatActivity {
@@ -96,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
     private void initFacebook() {
         mCallbackManager = CallbackManager.Factory.create();
         Util.setProfile(null);
-        LoginManager.getInstance().logOut();
+        //TODO: Restore LoginManager.getInstance().logOut();
         LoginManager.getInstance().registerCallback(mCallbackManager,
                 new FacebookCallback<LoginResult>() {
                     @Override
@@ -109,6 +113,8 @@ public class LoginActivity extends AppCompatActivity {
                                             Util.Log("Can't retrieve Facebook info");
                                         } else {
                                             try {
+                                                String id = response.getJSONObject()
+                                                        .get("id").toString();
                                                 String name = response.getJSONObject()
                                                         .get("name").toString();
                                                 String photo = "https://graph.facebook.com/"
@@ -116,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
                                                         .get("id").toString() + "/picture?type=large";
                                                 String email = response.getJSONObject()
                                                         .get("email").toString();
-                                                signInOnServer(name, photo, email);
+                                                signInOnServer(id, name, photo, email);
                                             } catch (JSONException e) {
                                                 Util.Log("Can't retrieve Facebook name: " + e
                                                         + ", " + me.toString());
@@ -143,12 +149,30 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    private void signInOnServer(String name, String photo, String email) {
-        String id = "1";
-        Profile profile = new Profile(id, name, photo, email);
-        Util.setProfile(profile);
-        startActivity(new Intent(this, MainActivity.class));
-        finish();
+    private void signInOnServer(String id, String name, String photo, String email) {
+        Call<Profile> call = ApiFactory.getApiService().signInFacebook
+                (id, name, photo, email);
+        call.enqueue(new Callback<Profile>() {
+            @Override
+            public void onResponse(Call<Profile> call,
+                                   Response<Profile> response) {
+                Profile profile = response.body();
+                if (profile != null) {
+                    Util.setProfile(profile);
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    finish();
+                } else {
+                    Toast.makeText(LoginActivity.this, "Can't log in with Facebook.",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Profile> call, Throwable t) {
+                Toast.makeText(LoginActivity.this, "Can't log in with Facebook.",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

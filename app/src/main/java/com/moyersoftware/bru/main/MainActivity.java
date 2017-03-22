@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -20,8 +21,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.moyersoftware.bru.R;
-import com.moyersoftware.bru.user.LoginActivity;
 import com.moyersoftware.bru.main.adapter.MainPagerAdapter;
+import com.moyersoftware.bru.settings.SettingsActivity;
+import com.moyersoftware.bru.user.LoginActivity;
 import com.moyersoftware.bru.util.Util;
 
 import butterknife.Bind;
@@ -165,12 +167,30 @@ public class MainActivity extends AppCompatActivity {
         mLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                mDrawerLayout.closeDrawers();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        finish();
+                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                    }
+                }, 250);
             }
         });
 
         mDrawerSettings.setVisibility(Util.isLoggedIn() ? View.VISIBLE : View.GONE);
+        mDrawerSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDrawerLayout.closeDrawers();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                    }
+                }, 250);
+            }
+        });
     }
 
     @Override

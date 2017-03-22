@@ -1,20 +1,24 @@
 package com.moyersoftware.bru.network;
 
+import com.moyersoftware.bru.user.model.Profile;
+
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
 
 public interface ApiService {
 
-    /**
-     * Login
-     */
     @FormUrlEncoded
-    @POST("/user/login")
-    Call<String> login(@Field("user_name") String userName,
-                       @Field("password") String password,
-                       @Field("device_token") String deviceToken,
-                       @Query("time") long timestamp);
+    @POST("user/sign_in_facebook.php")
+    Call<Profile> signInFacebook(@Field("id") String id,
+                                 @Field("name") String names,
+                                 @Field("photo") String photo,
+                                 @Field("email") String email);
+
+    @FormUrlEncoded
+    @POST("user/register.php")
+    Call<Profile> register(@Field("name") String names,
+                           @Field("email") String email,
+                           @Field("password") String password);
 }

@@ -13,8 +13,8 @@ import com.moyersoftware.bru.user.model.Profile;
 public class Util {
 
     private static final String LOG_TAG = "BruDebug";
-    public static final String BASE_API_URL = "";
-    public static final int DEBUG_MAX_LENGTH = 500;
+    public static final String BASE_API_URL = "http://moyersoftware.com/bru/api/v1/";
+    private static final int DEBUG_MAX_LENGTH = 500;
     private static final String PREF_PROFILE = "Profile";
 
     /**
