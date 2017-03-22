@@ -20,7 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.moyersoftware.bru.R;
-import com.moyersoftware.bru.auth.LoginActivity;
+import com.moyersoftware.bru.user.LoginActivity;
 import com.moyersoftware.bru.main.adapter.MainPagerAdapter;
 import com.moyersoftware.bru.util.Util;
 
