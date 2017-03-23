@@ -15,14 +15,18 @@ public final class Profile {
     private final String mPhoto;
     @SerializedName("email")
     private final String mEmail;
+    @SerializedName("location")
+    private final String mLocation;
     @SerializedName("token")
     private final String mToken;
 
-    public Profile(String id, String name, String photo, String email, String token) {
+    public Profile(String id, String name, String photo, String email, String location,
+                   String token) {
         mId = id;
         mName = name;
         mPhoto = photo;
         mEmail = email;
+        mLocation = location;
         mToken = token;
     }
 
@@ -40,6 +44,10 @@ public final class Profile {
 
     public String getEmail() {
         return mEmail;
+    }
+
+    public String getLocation() {
+        return mLocation;
     }
 
     public String getToken() {

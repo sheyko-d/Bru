@@ -1,16 +1,25 @@
 package com.moyersoftware.bru.main.data;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Immutable model class for a News Feed item.
  */
 public final class NewsFeed {
 
+    @SerializedName("id")
     private final String mId;
+    @SerializedName("user_name")
     private final String mUserName;
+    @SerializedName("user_photo")
     private final String mUserPhoto;
+    @SerializedName("location")
     private final String mLocation;
+    @SerializedName("text")
     private final String mText;
+    @SerializedName("image")
     private final String mImage;
+    @SerializedName("time")
     private final String mTime;
 
     public NewsFeed(String id, String userName, String userPhoto, String location, String text,
