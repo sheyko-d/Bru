@@ -4,7 +4,7 @@
     package="com.moyersoftware.bru">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name=".app.BruApp"
@@ -22,14 +22,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".user.LoginActivity" />
-        <activity android:name=".user.RegistrationActivity" />
+        <activity
+            android:name=".user.LoginActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".user.RegistrationActivity"
+            android:windowSoftInputMode="stateHidden" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <activity android:name=".settings.SettingsActivity"></activity>
+        <activity android:name=".settings.SettingsActivity" />
+        <activity
+            android:name=".addpost.AddPostActivity"
+            android:windowSoftInputMode="stateVisible" />
     </application>
 
 </manifest>

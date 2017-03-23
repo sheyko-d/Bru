@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.moyersoftware.bru.R;
@@ -28,6 +29,8 @@ public class NewsFeedFragment extends Fragment {
 
     @Bind(R.id.recycler)
     RecyclerView mRecycler;
+    @Bind(R.id.progress_bar)
+    ProgressBar mProgressBar;
 
     private NewsFeedAdapter mAdapter;
     private ArrayList<NewsFeed> mNewsFeedItems = new ArrayList<>();
@@ -60,17 +63,17 @@ public class NewsFeedFragment extends Fragment {
     }
 
     private void loadItems() {
-        /*mNewsFeedItems.add(new NewsFeed("1", "John Smith", "https://lh5.googleusercontent.com/-sHPcZPbhGiM/AAAAAAAAAAI/AAAAAAAAAAA/6Z0lXbDJPZA/w80-h80/photo.jpg", "Monson, MA", "The line isn't that bad actually. Just got here and it's moving pretty well.", "https://static1.squarespace.com/static/501bb93ec4aa651f100e3b0f/50e9b630e4b07dba6009671a/50e9c2fee4b0e6a1b5e2b655/1357497094092/IMG_8768.jpg", "5 min"));
-        mNewsFeedItems.add(new NewsFeed("2", "Sean White", "https://lh4.googleusercontent.com/-KtMMhAGWGX4/AAAAAAAAAAI/AAAAAAAAAAA/1fG8_Lej6tg/w80-h80/photo.jpg", "Hartford, CT ", "Is anyone there? How long is the line?", "", "10 min"));
-        mAdapter.notifyDataSetChanged();*/
+        mNewsFeedItems.clear();
+        mProgressBar.setVisibility(View.VISIBLE);
+
         Call<ArrayList<NewsFeed>> call = ApiFactory.getApiService().getNewsFeed();
         call.enqueue(new Callback<ArrayList<NewsFeed>>() {
             @Override
             public void onResponse(Call<ArrayList<NewsFeed>> call,
                                    Response<ArrayList<NewsFeed>> response) {
+                mProgressBar.setVisibility(View.GONE);
                 ArrayList<NewsFeed> newsFeedItems = response.body();
                 if (newsFeedItems != null) {
-                    mNewsFeedItems.clear();
                     mNewsFeedItems.addAll(newsFeedItems);
                     mAdapter.notifyDataSetChanged();
                 } else {
@@ -81,6 +84,7 @@ public class NewsFeedFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ArrayList<NewsFeed>> call, Throwable t) {
+                mProgressBar.setVisibility(View.GONE);
                 Toast.makeText(getActivity(), "Can't get the news feed.",
                         Toast.LENGTH_SHORT).show();
             }

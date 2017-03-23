@@ -18,4 +18,7 @@
     <string name="login_name">Your name</string>
     <string name="login_repeat_password">Repeat password</string>
     <string name="registration_submit">Create an account</string>
+    <string name="add_new_post_hint">Say something…</string>
+    <string name="send">Send</string>
+    <string name="attach">Attach photo</string>
 </resources>

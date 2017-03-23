@@ -31,6 +31,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 import com.moyersoftware.bru.R;
+import com.moyersoftware.bru.addpost.AddPostActivity;
 import com.moyersoftware.bru.main.adapter.MainPagerAdapter;
 import com.moyersoftware.bru.network.ApiFactory;
 import com.moyersoftware.bru.settings.SettingsActivity;
@@ -112,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                     finish();
                     startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 } else {
-                    // TODO: Add news
+                    startActivity(new Intent(MainActivity.this, AddPostActivity.class));
                 }
             }
         });
