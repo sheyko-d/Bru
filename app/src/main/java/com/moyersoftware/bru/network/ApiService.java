@@ -39,4 +39,9 @@ public interface ApiService {
 
     @GET("news_feed/get_news_feed.php")
     Call<ArrayList<NewsFeed>> getNewsFeed();
+
+    @FormUrlEncoded
+    @POST("news_feed/add_post.php")
+    Call<Void> addPost(@Field("text") String text,
+                       @Field("token") String token);
 }

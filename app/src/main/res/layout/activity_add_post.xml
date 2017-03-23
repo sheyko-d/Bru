@@ -15,16 +15,17 @@
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        tools:targetApi="lollipop"/>
+        tools:targetApi="lollipop" />
 
     <EditText
+        android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="@null"
         android:gravity="top"
         android:hint="@string/add_new_post_hint"
-        android:inputType="textMultiLine"
+        android:inputType="textMultiLine|textCapSentences"
         android:lineSpacingExtra="4dp"
         android:paddingBottom="24dp"
         android:paddingLeft="18dp"

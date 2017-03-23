@@ -50,9 +50,14 @@ public class NewsFeedFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         initRecycler();
-        loadItems();
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadItems();
     }
 
     private void initRecycler() {
