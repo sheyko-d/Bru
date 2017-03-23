@@ -5,6 +5,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -195,5 +198,40 @@ public class SettingsActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void onRateButtonClicked(View view) {
+        final String appPackageName = getPackageName();
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("market://details?id=" + appPackageName)));
+        } catch (android.content.ActivityNotFoundException e) {
+            startActivity(new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+        }
+    }
+
+    public void onAboutButtonClicked(View view) {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this, R.style.MaterialDialog);
+        PackageInfo pInfo;
+        try {
+            pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            String version = pInfo.versionName;
+            dialog.setTitle(getString(R.string.app_name) + " v" + version);
+        } catch (PackageManager.NameNotFoundException e) {
+            dialog.setTitle(R.string.app_name);
+        }
+        dialog.setMessage("NORMAL HOURS: Wednesday 12-6 PM for Can Sales Only. Thursday" +
+                "& Friday 4 - 8 PM.  Saturday 11AM - 6PM for Cans & Growlers.\n" +
+                "\n" +
+                "This app is accurate to start retail hours and will ALWAYS be updated AS" +
+                "SOON AS BEER IS PACKAGED!\n" +
+                "\n" +
+                "ONCE OUR RETAIL HOURS BEGIN WE CANNOT GUARANTEE THAT THESE BEERS WILL BE" +
+                "AVAILABLE WHEN YOU ARRIVE!  LIMITS MAY BE ADJUSTED AT ANY TIME.\n" +
+                "\n" +
+                "Follow @treehousebrewco on Twitter for real time updates.");
+        dialog.setPositiveButton("Close", null);
+        dialog.show();
     }
 }
