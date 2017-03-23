@@ -9,4 +9,5 @@
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#727272</color>
     <color name="image_placeholder">#e8e8e8</color>
+    <color name="divider">#f0f0f0</color>
 </resources>
