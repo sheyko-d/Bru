@@ -11,9 +11,12 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.moyersoftware.bru.R;
 import com.moyersoftware.bru.network.ApiFactory;
 import com.moyersoftware.bru.util.Util;
@@ -21,10 +24,14 @@ import com.nguyenhoanglam.imagepicker.activity.ImagePicker;
 import com.nguyenhoanglam.imagepicker.activity.ImagePickerActivity;
 import com.nguyenhoanglam.imagepicker.model.Image;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,6 +43,14 @@ public class AddPostActivity extends AppCompatActivity {
     Toolbar mToolbar;
     @Bind(R.id.text)
     EditText mText;
+    @Bind(R.id.image)
+    ImageView mImage;
+    @Bind(R.id.image_layout)
+    View mImageLayout;
+    @Bind(R.id.delete)
+    View mDelete;
+
+    private String mImagePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +59,18 @@ public class AddPostActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         initActionBar();
+        initDelete();
+    }
+
+    private void initDelete() {
+        mDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mImagePath = null;
+                mImageLayout.setVisibility(View.GONE);
+                mImage.setImageResource(0);
+            }
+        });
     }
 
     /**
@@ -66,7 +93,9 @@ public class AddPostActivity extends AppCompatActivity {
         if (requestCode == 0 && resultCode == RESULT_OK && data != null) {
             ArrayList<Image> images = data.getParcelableArrayListExtra
                     (ImagePickerActivity.INTENT_EXTRA_SELECTED_IMAGES);
-            Util.Log("path = " + images.get(0).getPath());
+            mImagePath = images.get(0).getPath();
+            mImageLayout.setVisibility(View.VISIBLE);
+            Glide.with(this).load(mImagePath).into(mImage);
         }
     }
 
@@ -95,7 +124,7 @@ public class AddPostActivity extends AppCompatActivity {
     }
 
     private void addPost() {
-        if (TextUtils.isEmpty(mText.getText())){
+        if (TextUtils.isEmpty(mText.getText())) {
             Toast.makeText(this, "Post can't be empty.", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -105,8 +134,15 @@ public class AddPostActivity extends AppCompatActivity {
         dlg.setMessage("Loading...");
         dlg.show();
 
+        MultipartBody.Part imagePart = null;
+        if (mImagePath != null) {
+            File file = new File(mImagePath);
+            imagePart = MultipartBody.Part.createFormData("file",
+                    file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
+        }
+
         Call<Void> call = ApiFactory.getApiService().addPost
-                (mText.getText().toString(), Util.getProfile().getToken());
+                (mText.getText().toString(), Util.getProfile().getToken(), imagePart);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call,

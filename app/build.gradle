@@ -7,8 +7,8 @@ android {
         applicationId "com.moyersoftware.bru"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 5
-        versionName "0.05"
+        versionCode 6
+        versionName "0.06"
     }
     buildTypes {
         release {

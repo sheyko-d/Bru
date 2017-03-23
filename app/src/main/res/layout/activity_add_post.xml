@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     android:background="@android:color/white"
     android:orientation="vertical">
 
@@ -34,4 +35,35 @@
         android:textColor="@color/primary_text"
         android:textColorHint="@color/secondary_text"
         android:textSize="16sp" />
+
+    <FrameLayout
+        android:id="@+id/image_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:background="@color/image_placeholder"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop" />
+
+        <ImageView
+            android:id="@+id/delete"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="end"
+            android:background="@drawable/delete_bg"
+            android:contentDescription="@null"
+            android:paddingBottom="10dp"
+            android:paddingEnd="8dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="8dp"
+            android:paddingStart="9dp"
+            android:paddingTop="8dp"
+            android:src="@drawable/delete" />
+    </FrameLayout>
 </LinearLayout>
