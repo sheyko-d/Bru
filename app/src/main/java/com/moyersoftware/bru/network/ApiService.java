@@ -48,4 +48,11 @@ public interface ApiService {
     Call<Void> addPost(@Part("text") String text,
                        @Part("token") String token,
                        @Part MultipartBody.Part file);
+
+    @Multipart
+    @POST("user/update_profile.php")
+    Call<Void> updateProfile(@Part("name") String name,
+                             @Part("email") String email,
+                             @Part("token") String token,
+                             @Part MultipartBody.Part file);
 }

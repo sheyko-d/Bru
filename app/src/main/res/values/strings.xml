@@ -30,4 +30,7 @@
     <string name="rate">Rate the app</string>
     <string name="about">About</string>
     <string name="notifications">Notifications</string>
+    <string name="edit">edit</string>
+    <string name="edit_name">Edit your name</string>
+    <string name="edit_email">Edit your email</string>
 </resources>

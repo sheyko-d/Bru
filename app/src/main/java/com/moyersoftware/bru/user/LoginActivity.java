@@ -1,5 +1,6 @@
 package com.moyersoftware.bru.user;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -101,12 +102,17 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
+        final ProgressDialog dlg = new ProgressDialog(this);
+        dlg.setMessage("Loading...");
+        dlg.show();
+
         Call<Profile> call = ApiFactory.getApiService().login
                 (mEmail.getText().toString(), mPassword.getText().toString());
         call.enqueue(new Callback<Profile>() {
             @Override
             public void onResponse(Call<Profile> call,
                                    Response<Profile> response) {
+                dlg.dismiss();
                 Profile profile = response.body();
                 if (profile != null) {
                     Util.setProfile(profile);
@@ -120,6 +126,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Profile> call, Throwable t) {
+                dlg.dismiss();
                 Toast.makeText(LoginActivity.this, "Incorrect email or password.",
                         Toast.LENGTH_SHORT).show();
             }
@@ -134,7 +141,7 @@ public class LoginActivity extends AppCompatActivity {
     private void initFacebook() {
         mCallbackManager = CallbackManager.Factory.create();
         Util.setProfile(null);
-        //TODO: Restore LoginManager.getInstance().logOut();
+        LoginManager.getInstance().logOut();
         LoginManager.getInstance().registerCallback(mCallbackManager,
                 new FacebookCallback<LoginResult>() {
                     @Override
@@ -184,12 +191,17 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void signInOnServer(String id, String name, String photo, String email) {
+        final ProgressDialog dlg = new ProgressDialog(this);
+        dlg.setMessage("Loading...");
+        dlg.show();
+
         Call<Profile> call = ApiFactory.getApiService().signInFacebook
                 (id, name, photo, email);
         call.enqueue(new Callback<Profile>() {
             @Override
             public void onResponse(Call<Profile> call,
                                    Response<Profile> response) {
+                dlg.dismiss();
                 Profile profile = response.body();
                 if (profile != null) {
                     Util.setProfile(profile);
@@ -203,6 +215,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Profile> call, Throwable t) {
+                dlg.dismiss();
                 Toast.makeText(LoginActivity.this, "Can't log in with Facebook.",
                         Toast.LENGTH_SHORT).show();
             }

@@ -8,17 +8,17 @@ import com.google.gson.annotations.SerializedName;
 public final class Profile {
 
     @SerializedName("id")
-    private final String mId;
+    private String mId;
     @SerializedName("name")
-    private final String mName;
+    private String mName;
     @SerializedName("photo")
-    private final String mPhoto;
+    private String mPhoto;
     @SerializedName("email")
-    private final String mEmail;
+    private String mEmail;
     @SerializedName("location")
-    private final String mLocation;
+    private String mLocation;
     @SerializedName("token")
-    private final String mToken;
+    private String mToken;
 
     public Profile(String id, String name, String photo, String email, String location,
                    String token) {
@@ -52,5 +52,17 @@ public final class Profile {
 
     public String getToken() {
         return mToken;
+    }
+
+    public void setName(String name) {
+        this.mName = name;
+    }
+
+    public void setEmail(String email) {
+        this.mEmail = email;
+    }
+
+    public void setPhoto(String photo) {
+        this.mPhoto = photo;
     }
 }

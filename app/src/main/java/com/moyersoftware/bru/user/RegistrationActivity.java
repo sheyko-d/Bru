@@ -1,5 +1,6 @@
 package com.moyersoftware.bru.user;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -94,6 +95,10 @@ public class RegistrationActivity extends AppCompatActivity {
             return;
         }
 
+        final ProgressDialog dlg = new ProgressDialog(this);
+        dlg.setMessage("Loading...");
+        dlg.show();
+
         Call<Profile> call = ApiFactory.getApiService().register
                 (mName.getText().toString(), mEmail.getText().toString(),
                         mPassword.getText().toString());
@@ -101,6 +106,7 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Profile> call,
                                    Response<Profile> response) {
+                dlg.dismiss();
                 Profile profile = response.body();
                 if (profile != null) {
                     Util.setProfile(profile);
@@ -114,6 +120,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Profile> call, Throwable t) {
+                dlg.dismiss();
                 Toast.makeText(RegistrationActivity.this, "Can't create a new account.",
                         Toast.LENGTH_SHORT).show();
             }
