@@ -16,6 +16,7 @@ public class Util {
     public static final String BASE_API_URL = "http://moyersoftware.com/bru/api/v1/";
     private static final int DEBUG_MAX_LENGTH = 500;
     private static final String PREF_PROFILE = "Profile";
+    private static final String PREF_NOTIFICATIONS = "Notifications";
 
     /**
      * Adds a message to LogCat.
@@ -79,5 +80,15 @@ public class Util {
     public static Profile getProfile() {
         return new Gson().fromJson(PreferenceManager.getDefaultSharedPreferences
                 (BruApp.getContext()).getString(PREF_PROFILE, null), Profile.class);
+    }
+
+    public static boolean notificationsEnabled() {
+        return PreferenceManager.getDefaultSharedPreferences(BruApp.getContext())
+                .getBoolean(PREF_NOTIFICATIONS, true);
+    }
+
+    public static void setNotificationsEnabled(boolean enabled) {
+        PreferenceManager.getDefaultSharedPreferences(BruApp.getContext()).edit()
+                .putBoolean(PREF_NOTIFICATIONS, enabled).apply();
     }
 }

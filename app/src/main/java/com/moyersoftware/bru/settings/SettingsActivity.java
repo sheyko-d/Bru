@@ -16,6 +16,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -53,6 +55,8 @@ public class SettingsActivity extends AppCompatActivity {
     TextView mEmail;
     @Bind(R.id.photo)
     ImageView mPhoto;
+    @Bind(R.id.notifications)
+    CheckBox notifications;
 
     private String mImagePath;
 
@@ -72,6 +76,14 @@ public class SettingsActivity extends AppCompatActivity {
         mEmail.setText(profile.getEmail());
         Glide.with(this).load(profile.getPhoto()).error(R.drawable.avatar_placeholder).centerCrop()
                 .into(mPhoto);
+
+        notifications.setChecked(Util.notificationsEnabled());
+        notifications.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
+                Util.setNotificationsEnabled(checked);
+            }
+        });
     }
 
     /**

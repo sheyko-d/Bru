@@ -23,11 +23,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        if (!Util.isLoggedIn()) return;
+        if (!Util.isLoggedIn() || !Util.notificationsEnabled()) return;
 
         try {
             JSONObject message = new JSONObject(remoteMessage.getData());
-            if (message.getString("type").equals(TYPE_ON_TAP_UPDATED)){
+            if (message.getString("type").equals(TYPE_ON_TAP_UPDATED)) {
                 showBeersUpdatedNotification();
             }
         } catch (Exception e) {
