@@ -98,7 +98,9 @@ public class OnTapAdapter extends RecyclerView.Adapter<OnTapAdapter.ViewHolder> 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    assert mText != null;
+                    if (mOnTapItems.get(getAdapterPosition()).getAdapterType() != TYPE_ITEM) {
+                        return;
+                    }
 
                     if (mSelectedItems.contains(mOnTapItems.get(getAdapterPosition()).getId())) {
                         mSelectedItems.remove(mOnTapItems.get(getAdapterPosition()).getId());

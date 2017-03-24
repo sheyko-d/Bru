@@ -1,6 +1,8 @@
 package com.moyersoftware.bru.main.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -12,11 +14,16 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.moyersoftware.bru.R;
 import com.moyersoftware.bru.main.data.NewsFeed;
+import com.moyersoftware.bru.network.ApiFactory;
+import com.moyersoftware.bru.util.Util;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.ViewHolder> {
 
@@ -75,6 +82,46 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.ViewHo
         ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    if (getAdapterPosition() == -1 || !mNewsFeedItems.get(getAdapterPosition())
+                            .getUserId().equals(Util.getProfile().getId())) {
+                        return true;
+                    }
+                    final CharSequence[] items = {"Delete"};
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+
+                    builder.setItems(items, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int item) {
+                            int pos = getAdapterPosition();
+                            deleteNewsFeedItem(mNewsFeedItems.get(pos).getId());
+                            notifyItemRemoved(pos);
+                            mNewsFeedItems.remove(pos);
+                        }
+                    });
+                    builder.show();
+                    return true;
+                }
+            });
         }
+    }
+
+    private void deleteNewsFeedItem(String newsFeedId) {
+        Call<Void> call = ApiFactory.getApiService().deleteNewsFeedItem(newsFeedId,
+                Util.getProfile().getToken());
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call,
+                                   Response<Void> response) {
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+            }
+        });
     }
 }

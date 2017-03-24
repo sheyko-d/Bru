@@ -9,6 +9,8 @@ public final class NewsFeed {
 
     @SerializedName("id")
     private final String mId;
+    @SerializedName("user_id")
+    private final String mUserId;
     @SerializedName("user_name")
     private final String mUserName;
     @SerializedName("user_photo")
@@ -22,9 +24,10 @@ public final class NewsFeed {
     @SerializedName("time")
     private final String mTime;
 
-    public NewsFeed(String id, String userName, String userPhoto, String location, String text,
-                    String image, String time) {
+    public NewsFeed(String id, String userId, String userName, String userPhoto, String location,
+                    String text, String image, String time) {
         mId = id;
+        mUserId = userId;
         mUserName = userName;
         mUserPhoto = userPhoto;
         mLocation = location;
@@ -35,6 +38,10 @@ public final class NewsFeed {
 
     public String getId() {
         return mId;
+    }
+
+    public String getUserId() {
+        return mUserId;
     }
 
     public String getUserName() {

@@ -44,6 +44,11 @@ public interface ApiService {
     @GET("news_feed/get_news_feed.php")
     Call<ArrayList<NewsFeed>> getNewsFeed();
 
+    @FormUrlEncoded
+    @POST("news_feed/delete_news_feed_item.php")
+    Call<Void> deleteNewsFeedItem(@Field("news_feed_id") String newsFeedId,
+                                  @Field("token") String token);
+
     @GET("on_tap/get_on_tap.php")
     Call<OnTapApi> getOnTap();
 

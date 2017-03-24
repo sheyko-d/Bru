@@ -40,7 +40,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="@color/primary_text"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    tools:ignore="MissingPrefix" />
 
                 <TextView
                     android:id="@+id/time"
