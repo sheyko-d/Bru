@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -31,6 +30,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.moyersoftware.bru.R;
@@ -41,8 +42,6 @@ import com.moyersoftware.bru.settings.SettingsActivity;
 import com.moyersoftware.bru.user.LoginActivity;
 import com.moyersoftware.bru.util.Util;
 
-import java.util.List;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import retrofit2.Call;
@@ -50,7 +49,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     public static final String OPEN_ON_TAP_EXTRA = "OpenOnTap";
 
@@ -309,22 +309,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         if (lastLocation != null) {
             updateLocation(lastLocation.getLatitude(), lastLocation.getLongitude());
         } else {
-            LocationManager mLocationManager = (LocationManager) getApplicationContext()
-                    .getSystemService(LOCATION_SERVICE);
-            List<String> providers = mLocationManager.getProviders(true);
-            Location bestLocation = null;
-            for (String provider : providers) {
-                Location l = mLocationManager.getLastKnownLocation(provider);
-                if (l == null) {
-                    continue;
-                }
-                if (bestLocation == null || l.getAccuracy() < bestLocation.getAccuracy()) {
-                    bestLocation = l;
-                }
-            }
-            if (bestLocation != null) {
-                updateLocation(bestLocation.getLatitude(), bestLocation.getLongitude());
-            }
+            LocationRequest locationRequest = new LocationRequest();
+            locationRequest.setInterval(10000);
+            locationRequest.setFastestInterval(5000);
+            locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+            LocationServices.FusedLocationApi.requestLocationUpdates(
+                    mGoogleApiClient, locationRequest, this);
         }
     }
 
@@ -368,5 +358,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             public void onFailure(Call<Void> call, Throwable t) {
             }
         });
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        updateLocation(location.getLatitude(), location.getLongitude());
+        LocationServices.FusedLocationApi.removeLocationUpdates(
+                mGoogleApiClient, this);
     }
 }
