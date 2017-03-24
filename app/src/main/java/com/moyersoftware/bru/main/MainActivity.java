@@ -100,9 +100,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     }
 
     private void initAds() {
-        MobileAds.initialize(getApplicationContext(), getString(R.string.banner_ad_unit_id));
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-1761468736156699~1132205161");
         AdView mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
         mAdView.loadAd(adRequest);
     }
 
