@@ -59,6 +59,10 @@ public class OnTapAdapter extends RecyclerView.Adapter<OnTapAdapter.ViewHolder> 
             holder.mPrice.setText(onTapItem.getPrice());
             holder.mAmount.setText(onTapItem.getAmount());
             holder.mText.setText(onTapItem.getText());
+        } else if (getItemViewType(position) == TYPE_HOURS) {
+            assert holder.mText != null;
+            holder.mText.setText(onTapItem.getText());
+            holder.mName.setText(onTapItem.getName());
         } else {
             holder.mName.setText(onTapItem.getName());
         }

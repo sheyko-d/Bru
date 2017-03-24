@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
@@ -41,6 +42,8 @@ public class OnTapFragment extends Fragment {
     ProgressBar mProgressBar;
     @Bind(R.id.placeholder)
     View mPlaceholder;
+    @Bind(R.id.swipe_layout)
+    SwipeRefreshLayout mSwipeLayout;
 
     private OnTapAdapter mAdapter;
     private ArrayList<OnTap> mOnTapItems = new ArrayList<>();
@@ -61,8 +64,31 @@ public class OnTapFragment extends Fragment {
 
         initRecycler();
         initReceiver();
+        initSwipeLayout();
 
         return view;
+    }
+
+    private void initSwipeLayout() {
+        mSwipeLayout.setColorSchemeResources(R.color.colorPrimary);
+        mSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Call<Void> call = ApiFactory.getApiService().updateBeers();
+                call.enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call,
+                                           Response<Void> response) {
+                        loadItems();
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        mSwipeLayout.setRefreshing(false);
+                    }
+                });
+            }
+        });
     }
 
     private void initReceiver() {
@@ -108,7 +134,8 @@ public class OnTapFragment extends Fragment {
                         return;
                     }
 
-                    mOnTapItems.add(new OnTap(response.body().getHours(), OnTapAdapter.TYPE_HOURS));
+                    mOnTapItems.add(new OnTap(response.body().getHours(),
+                            response.body().getLastUpdated(), OnTapAdapter.TYPE_HOURS));
 
                     boolean containsCans = false;
                     for (OnTap onTapItem : onTapItems) {
@@ -139,6 +166,10 @@ public class OnTapFragment extends Fragment {
                             Toast.LENGTH_SHORT).show();
                     mPlaceholder.setVisibility(View.VISIBLE);
                 }
+
+                if (mSwipeLayout.isRefreshing()){
+                    mSwipeLayout.setRefreshing(false);
+                }
             }
 
             @Override
@@ -147,6 +178,11 @@ public class OnTapFragment extends Fragment {
                 mPlaceholder.setVisibility(View.VISIBLE);
                 Toast.makeText(getActivity(), "Can't get the on tap beers.",
                         Toast.LENGTH_SHORT).show();
+                mAdapter.notifyDataSetChanged();
+
+                if (mSwipeLayout.isRefreshing()){
+                    mSwipeLayout.setRefreshing(false);
+                }
             }
         });
     }

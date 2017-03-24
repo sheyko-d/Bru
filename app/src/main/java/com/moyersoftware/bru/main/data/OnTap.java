@@ -32,6 +32,12 @@ public final class OnTap {
         mAdapterType = adapterType;
     }
 
+    public OnTap(String name, String text, int adapterType) {
+        mName = name;
+        mText = text;
+        mAdapterType = adapterType;
+    }
+
     public String getId() {
         return mId;
     }

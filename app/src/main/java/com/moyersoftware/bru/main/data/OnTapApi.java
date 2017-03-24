@@ -13,10 +13,13 @@ public final class OnTapApi {
     private final String mHours;
     @SerializedName("on_tap_items")
     private final ArrayList<OnTap> mOnTapItems;
+    @SerializedName("last_updated")
+    private final String mLastUpdated;
 
-    public OnTapApi(String hours, ArrayList<OnTap> onTapItems) {
+    public OnTapApi(String hours, ArrayList<OnTap> onTapItems, String lastUpdated) {
         mHours = hours;
         mOnTapItems = onTapItems;
+        mLastUpdated = lastUpdated;
     }
 
     public String getHours() {
@@ -25,5 +28,9 @@ public final class OnTapApi {
 
     public ArrayList<OnTap> getOnTapItems() {
         return mOnTapItems;
+    }
+
+    public String getLastUpdated() {
+        return mLastUpdated;
     }
 }

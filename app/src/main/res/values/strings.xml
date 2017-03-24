@@ -40,4 +40,5 @@
     <string name="no_beers_desc">You\'ll get a notification about any updates.</string>
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
     <string name="skip">Got it</string>
+    <string name="last_updated">Last updated:</string>
 </resources>
