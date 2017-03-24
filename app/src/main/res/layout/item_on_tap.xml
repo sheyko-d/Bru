@@ -25,19 +25,22 @@
 
         <TextView
             android:id="@+id/content"
+            fontPath="fonts/Roboto-Medium.ttf"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textColor="@color/primary_text"
             android:textSize="14sp"
+            tools:ignore="MissingPrefix"
             tools:text="American IPA - 6.8% ABV" />
 
         <TextView
             android:id="@+id/amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/primary_text"
+            android:textColor="@color/secondary_text"
             android:textSize="14sp"
+            tools:ignore="MissingPrefix"
             tools:text="6 cans PP " />
     </LinearLayout>
 
