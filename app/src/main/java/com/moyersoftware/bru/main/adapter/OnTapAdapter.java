@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.moyersoftware.bru.R;
 import com.moyersoftware.bru.main.data.OnTap;
@@ -26,6 +25,7 @@ public class OnTapAdapter extends RecyclerView.Adapter<OnTapAdapter.ViewHolder> 
 
     private final Context mContext;
     private ArrayList<OnTap> mOnTapItems;
+    private ArrayList<String> mSelectedItems = new ArrayList<>();
 
     public OnTapAdapter(Context context, ArrayList<OnTap> onTapsItems) {
         mContext = context;
@@ -48,6 +48,12 @@ public class OnTapAdapter extends RecyclerView.Adapter<OnTapAdapter.ViewHolder> 
             assert holder.mPrice != null;
             assert holder.mAmount != null;
             assert holder.mText != null;
+
+            if (mSelectedItems.contains(onTapItem.getId())) {
+                holder.mText.setMaxLines(Integer.MAX_VALUE);
+            } else {
+                holder.mText.setMaxLines(2);
+            }
 
             holder.mName.setText(onTapItem.getName());
             holder.mContent.setText(onTapItem.getContent());
@@ -94,8 +100,15 @@ public class OnTapAdapter extends RecyclerView.Adapter<OnTapAdapter.ViewHolder> 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(mContext, "Clicking doesn't work yet \uD83D\uDE48", Toast.LENGTH_SHORT)
-                            .show();
+                    assert mText != null;
+
+                    if (mSelectedItems.contains(mOnTapItems.get(getAdapterPosition()).getId())) {
+                        mSelectedItems.remove(mOnTapItems.get(getAdapterPosition()).getId());
+                    } else {
+                        mSelectedItems.add(mOnTapItems.get(getAdapterPosition()).getId());
+                    }
+                    notifyItemChanged(getAdapterPosition());
+                    Util.Log("click");
                 }
             });
         }
