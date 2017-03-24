@@ -9,6 +9,14 @@
         <item name="android:windowBackground">@color/window_bg</item>
     </style>
 
+    <style name="AppTheme.Dark" parent="AppTheme">
+        <item name="colorPrimary">#333</item>
+        <item name="colorPrimaryDark">#0c0c0c</item>
+        <item name="colorAccent">@android:color/white</item>
+        <item name="android:windowBackground">@android:color/black</item>
+        <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>
+    </style>
+
     <style name="TabLayoutTextStyle">
         <item name="fontPath">fonts/Roboto-Bold.ttf</item>
         <item name="android:textSize">18sp</item>

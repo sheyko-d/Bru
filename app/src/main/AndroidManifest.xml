@@ -52,6 +52,10 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+
+        <activity
+            android:name=".main.ImageFullScreen"
+            android:theme="@style/AppTheme.Dark" />
     </application>
 
 </manifest>

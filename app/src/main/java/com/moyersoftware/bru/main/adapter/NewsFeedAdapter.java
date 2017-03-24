@@ -2,6 +2,7 @@ package com.moyersoftware.bru.main.adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -12,7 +13,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.moyersoftware.bru.R;
+import com.moyersoftware.bru.main.ImageFullScreen;
 import com.moyersoftware.bru.main.data.NewsFeed;
 import com.moyersoftware.bru.network.ApiFactory;
 import com.moyersoftware.bru.util.Util;
@@ -52,7 +55,8 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.ViewHo
         if (!TextUtils.isEmpty(newsFeedItem.getImage())) {
             holder.mImage.setVisibility(View.VISIBLE);
             Glide.with(mContext).load(newsFeedItem.getImage())
-                    .error(R.color.image_placeholder).centerCrop().into(holder.mImage);
+                    .error(R.color.image_placeholder).centerCrop()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.mImage);
         } else {
             holder.mImage.setVisibility(View.GONE);
         }
@@ -105,6 +109,15 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.ViewHo
                     });
                     builder.show();
                     return true;
+                }
+            });
+
+            mImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mContext.startActivity(new Intent(mContext, ImageFullScreen.class)
+                            .putExtra(ImageFullScreen.IMAGE_EXTRA,
+                                    mNewsFeedItems.get(getAdapterPosition()).getImage()));
                 }
             });
         }
