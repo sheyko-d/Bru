@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.moyersoftware.bru.R;
 import com.moyersoftware.bru.main.data.OnTap;
-import com.moyersoftware.bru.util.Util;
 
 import java.util.ArrayList;
 
@@ -67,7 +66,6 @@ public class OnTapAdapter extends RecyclerView.Adapter<OnTapAdapter.ViewHolder> 
 
     @Override
     public int getItemViewType(int position) {
-        Util.Log("type = " + mOnTapItems.get(position).getAdapterType());
         return mOnTapItems.get(position).getAdapterType();
     }
 
@@ -108,7 +106,6 @@ public class OnTapAdapter extends RecyclerView.Adapter<OnTapAdapter.ViewHolder> 
                         mSelectedItems.add(mOnTapItems.get(getAdapterPosition()).getId());
                     }
                     notifyItemChanged(getAdapterPosition());
-                    Util.Log("click");
                 }
             });
         }

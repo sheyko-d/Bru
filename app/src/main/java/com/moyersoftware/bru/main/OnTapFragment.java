@@ -33,6 +33,8 @@ public class OnTapFragment extends Fragment {
     RecyclerView mRecycler;
     @Bind(R.id.progress_bar)
     ProgressBar mProgressBar;
+    @Bind(R.id.placeholder)
+    View mPlaceholder;
 
     private OnTapAdapter mAdapter;
     private ArrayList<OnTap> mOnTapItems = new ArrayList<>();
@@ -82,6 +84,12 @@ public class OnTapFragment extends Fragment {
                 mProgressBar.setVisibility(View.GONE);
                 ArrayList<OnTap> onTapItems = response.body().getOnTapItems();
                 if (onTapItems != null) {
+                    if (onTapItems.size() == 0) {
+                        mPlaceholder.setVisibility(View.VISIBLE);
+                        mAdapter.notifyDataSetChanged();
+                        return;
+                    }
+
                     mOnTapItems.add(new OnTap(response.body().getHours(), OnTapAdapter.TYPE_HOURS));
 
                     boolean containsCans = false;
@@ -107,15 +115,18 @@ public class OnTapFragment extends Fragment {
                     }
 
                     mAdapter.notifyDataSetChanged();
+                    mPlaceholder.setVisibility(View.GONE);
                 } else {
                     Toast.makeText(getActivity(), "Can't get the on tap beers.",
                             Toast.LENGTH_SHORT).show();
+                    mPlaceholder.setVisibility(View.VISIBLE);
                 }
             }
 
             @Override
             public void onFailure(Call<OnTapApi> call, Throwable t) {
                 mProgressBar.setVisibility(View.GONE);
+                mPlaceholder.setVisibility(View.VISIBLE);
                 Toast.makeText(getActivity(), "Can't get the on tap beers.",
                         Toast.LENGTH_SHORT).show();
             }
