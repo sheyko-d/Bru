@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     private boolean requestLocationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                    != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
+                    != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this,
                     Manifest.permission.ACCESS_COARSE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
@@ -300,8 +300,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
+                != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            requestLocationPermission();
             return;
         }
         Location lastLocation = LocationServices.FusedLocationApi.getLastLocation(
@@ -344,7 +345,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     private void updateGoogleToken() {
         String googleToken = FirebaseInstanceId.getInstance().getToken();
 
-        if (TextUtils.isEmpty(googleToken)) return;
+        if (TextUtils.isEmpty(googleToken) || !Util.isLoggedIn()) return;
 
         Call<Void> call = ApiFactory.getApiService().updateGoogleToken(googleToken,
                 Util.getProfile().getToken());
