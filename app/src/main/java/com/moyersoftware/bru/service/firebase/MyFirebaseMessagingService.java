@@ -11,6 +11,7 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.moyersoftware.bru.R;
 import com.moyersoftware.bru.main.MainActivity;
+import com.moyersoftware.bru.main.OnTapFragment;
 import com.moyersoftware.bru.util.Util;
 
 import org.json.JSONObject;
@@ -23,11 +24,13 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        if (!Util.isLoggedIn() || !Util.notificationsEnabled()) return;
 
         try {
             JSONObject message = new JSONObject(remoteMessage.getData());
             if (message.getString("type").equals(TYPE_ON_TAP_UPDATED)) {
+                sendBroadcast(new Intent(OnTapFragment.UPDATE_BEERS_INTENT));
+
+                if (!Util.isLoggedIn() || !Util.notificationsEnabled()) return;
                 showBeersUpdatedNotification();
             }
         } catch (Exception e) {

@@ -1,5 +1,9 @@
 package com.moyersoftware.bru.main;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -29,6 +33,8 @@ import retrofit2.Response;
 
 public class OnTapFragment extends Fragment {
 
+    public static final String UPDATE_BEERS_INTENT = "com.moyersoftware.bru.UPDATE_BEERS";
+
     @Bind(R.id.recycler)
     RecyclerView mRecycler;
     @Bind(R.id.progress_bar)
@@ -54,9 +60,21 @@ public class OnTapFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         initRecycler();
+        initReceiver();
 
         return view;
     }
+
+    private void initReceiver() {
+        getActivity().registerReceiver(mReceiver, new IntentFilter(UPDATE_BEERS_INTENT));
+    }
+
+    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            loadItems();
+        }
+    };
 
     @Override
     public void onResume() {
