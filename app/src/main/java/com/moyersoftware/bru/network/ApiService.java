@@ -1,7 +1,7 @@
 package com.moyersoftware.bru.network;
 
 import com.moyersoftware.bru.main.data.NewsFeed;
-import com.moyersoftware.bru.main.data.OnTap;
+import com.moyersoftware.bru.main.data.OnTapApi;
 import com.moyersoftware.bru.user.model.Profile;
 
 import java.util.ArrayList;
@@ -45,7 +45,7 @@ public interface ApiService {
     Call<ArrayList<NewsFeed>> getNewsFeed();
 
     @GET("on_tap/get_on_tap.php")
-    Call<ArrayList<OnTap>> getOnTap();
+    Call<OnTapApi> getOnTap();
 
     @Multipart
     @POST("news_feed/add_post.php")

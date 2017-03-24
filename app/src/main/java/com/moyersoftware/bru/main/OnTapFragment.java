@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.moyersoftware.bru.R;
 import com.moyersoftware.bru.main.adapter.OnTapAdapter;
 import com.moyersoftware.bru.main.data.OnTap;
+import com.moyersoftware.bru.main.data.OnTapApi;
 import com.moyersoftware.bru.network.ApiFactory;
 import com.moyersoftware.bru.util.Util;
 import com.moyersoftware.bru.util.VerticalSpaceItemDecoration;
@@ -71,15 +72,18 @@ public class OnTapFragment extends Fragment {
         mOnTapItems.clear();
         mProgressBar.setVisibility(View.VISIBLE);
 
-        Call<ArrayList<OnTap>> call = ApiFactory.getApiService().getOnTap();
-        call.enqueue(new Callback<ArrayList<OnTap>>() {
+        Call<OnTapApi> call = ApiFactory.getApiService().getOnTap();
+        call.enqueue(new Callback<OnTapApi>() {
             @Override
-            public void onResponse(Call<ArrayList<OnTap>> call,
-                                   Response<ArrayList<OnTap>> response) {
+            public void onResponse(Call<OnTapApi> call,
+                                   Response<OnTapApi> response) {
                 mProgressBar.setVisibility(View.GONE);
-                ArrayList<OnTap> onTapItems = response.body();
+                ArrayList<OnTap> onTapItems = response.body().getOnTapItems();
                 if (onTapItems != null) {
                     mOnTapItems.addAll(onTapItems);
+
+                    mAdapter.setHours(response.body().getHours());
+
                     mAdapter.notifyDataSetChanged();
                 } else {
                     Toast.makeText(getActivity(), "Can't get the on tap beers.",
@@ -88,7 +92,7 @@ public class OnTapFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ArrayList<OnTap>> call, Throwable t) {
+            public void onFailure(Call<OnTapApi> call, Throwable t) {
                 mProgressBar.setVisibility(View.GONE);
                 Toast.makeText(getActivity(), "Can't get the on tap beers.",
                         Toast.LENGTH_SHORT).show();

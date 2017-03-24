@@ -33,4 +33,5 @@
     <string name="edit">edit</string>
     <string name="edit_name">Edit your name</string>
     <string name="edit_email">Edit your email</string>
+    <string name="hours">Hours:</string>
 </resources>
