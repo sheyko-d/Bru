@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <android.support.v4.view.ViewPager
@@ -16,7 +16,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <TextView
+            fontPath="fonts/Comfortaa-Bold.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/app_name"
+            android:textColor="@android:color/white"
+            android:textSize="28sp"
+            tools:ignore="MissingPrefix" />
+    </android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,13 +48,13 @@
 
             <Button
                 android:layout_width="wrap_content"
-                android:textColor="@android:color/white"
-                android:textSize="14sp"
-                android:layout_gravity="end"
-                android:onClick="onSkipButtonClicked"
-                android:background="?selectableItemBackground"
                 android:layout_height="48dp"
-                android:text="@string/skip" />
+                android:layout_gravity="end"
+                android:background="?selectableItemBackground"
+                android:onClick="onSkipButtonClicked"
+                android:text="@string/skip"
+                android:textColor="@android:color/white"
+                android:textSize="14sp" />
         </FrameLayout>
     </LinearLayout>
 </FrameLayout>

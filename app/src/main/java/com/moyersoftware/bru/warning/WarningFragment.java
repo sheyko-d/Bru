@@ -35,7 +35,7 @@ public class WarningFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_how_to_play, container, false);
+        View view = inflater.inflate(R.layout.fragment_warning, container, false);
         ImageView image = (ImageView) view.findViewById(R.id.image);
         image.setImageResource(WarningActivity.mImages[page]);
         return view;

@@ -1,6 +1,7 @@
 package com.moyersoftware.bru.warning;
 
 import android.animation.ArgbEvaluator;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,6 +18,8 @@ import android.view.View;
 import com.moyersoftware.bru.R;
 import com.moyersoftware.bru.util.Util;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 
 public class WarningActivity extends AppCompatActivity {
 
@@ -26,7 +29,7 @@ public class WarningActivity extends AppCompatActivity {
     };
     // ... Images
     public static int[] mImages = new int[]{
-            R.drawable.image1,
+            R.drawable.warning,
     };
 
     private Toolbar mToolbar;
@@ -67,6 +70,7 @@ public class WarningActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
+            actionBar.setDisplayShowTitleEnabled(false);
         }
     }
 
@@ -132,5 +136,13 @@ public class WarningActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         finish();
         return true;
+    }
+
+    /**
+     * Required for the calligraphy library.
+     */
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 }
