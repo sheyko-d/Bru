@@ -41,6 +41,7 @@ import com.moyersoftware.bru.network.ApiFactory;
 import com.moyersoftware.bru.settings.SettingsActivity;
 import com.moyersoftware.bru.user.LoginActivity;
 import com.moyersoftware.bru.util.Util;
+import com.moyersoftware.bru.warning.WarningActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -88,6 +89,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         initFab();
         initGoogleClient();
         updateGoogleToken();
+
+        if (!Util.isTutorialShown()) {
+            startActivity(new Intent(this, WarningActivity.class));
+        }
     }
 
     protected void onStop() {

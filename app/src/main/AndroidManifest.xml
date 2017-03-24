@@ -57,6 +57,8 @@
         <activity
             android:name=".main.ImageFullScreen"
             android:theme="@style/AppTheme.Dark" />
+
+        <activity android:name=".warning.WarningActivity" />
     </application>
 
 </manifest>

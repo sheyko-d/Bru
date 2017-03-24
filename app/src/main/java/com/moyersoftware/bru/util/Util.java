@@ -17,6 +17,7 @@ public class Util {
     private static final int DEBUG_MAX_LENGTH = 500;
     private static final String PREF_PROFILE = "Profile";
     private static final String PREF_NOTIFICATIONS = "Notifications";
+    private static final String PREF_TUTORIAL_SHOWN = "TutorialShown";
 
     /**
      * Adds a message to LogCat.
@@ -90,5 +91,16 @@ public class Util {
     public static void setNotificationsEnabled(boolean enabled) {
         PreferenceManager.getDefaultSharedPreferences(BruApp.getContext()).edit()
                 .putBoolean(PREF_NOTIFICATIONS, enabled).apply();
+    }
+
+    public static void setTutorialShown() {
+        PreferenceManager.getDefaultSharedPreferences(BruApp.getContext()).edit()
+                .putBoolean(PREF_TUTORIAL_SHOWN, true)
+                .apply();
+    }
+
+    public static boolean isTutorialShown() {
+        return PreferenceManager.getDefaultSharedPreferences(BruApp.getContext())
+                .getBoolean(PREF_TUTORIAL_SHOWN, false);
     }
 }
