@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -39,6 +40,8 @@ import com.moyersoftware.bru.network.ApiFactory;
 import com.moyersoftware.bru.settings.SettingsActivity;
 import com.moyersoftware.bru.user.LoginActivity;
 import com.moyersoftware.bru.util.Util;
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -126,9 +129,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     private boolean requestLocationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 0);
+                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.ACCESS_COARSE_LOCATION}, 0);
                 return false;
             } else {
                 return true;
@@ -301,9 +307,24 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         Location lastLocation = LocationServices.FusedLocationApi.getLastLocation(
                 mGoogleApiClient);
         if (lastLocation != null) {
-            lastLocation.getLatitude();
-            lastLocation.getLongitude();
             updateLocation(lastLocation.getLatitude(), lastLocation.getLongitude());
+        } else {
+            LocationManager mLocationManager = (LocationManager) getApplicationContext()
+                    .getSystemService(LOCATION_SERVICE);
+            List<String> providers = mLocationManager.getProviders(true);
+            Location bestLocation = null;
+            for (String provider : providers) {
+                Location l = mLocationManager.getLastKnownLocation(provider);
+                if (l == null) {
+                    continue;
+                }
+                if (bestLocation == null || l.getAccuracy() < bestLocation.getAccuracy()) {
+                    bestLocation = l;
+                }
+            }
+            if (bestLocation != null) {
+                updateLocation(bestLocation.getLatitude(), bestLocation.getLongitude());
+            }
         }
     }
 
