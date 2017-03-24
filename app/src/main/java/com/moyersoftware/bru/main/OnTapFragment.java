@@ -63,7 +63,6 @@ public class OnTapFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         initRecycler();
-        initReceiver();
         initSwipeLayout();
 
         return view;
@@ -91,8 +90,16 @@ public class OnTapFragment extends Fragment {
         });
     }
 
-    private void initReceiver() {
+    @Override
+    public void onStart() {
+        super.onStart();
         getActivity().registerReceiver(mReceiver, new IntentFilter(UPDATE_BEERS_INTENT));
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        getActivity().unregisterReceiver(mReceiver);
     }
 
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
@@ -125,6 +132,8 @@ public class OnTapFragment extends Fragment {
             @Override
             public void onResponse(Call<OnTapApi> call,
                                    Response<OnTapApi> response) {
+                if (!isAdded()) return;
+
                 mProgressBar.setVisibility(View.GONE);
                 ArrayList<OnTap> onTapItems = response.body().getOnTapItems();
                 if (onTapItems != null) {
