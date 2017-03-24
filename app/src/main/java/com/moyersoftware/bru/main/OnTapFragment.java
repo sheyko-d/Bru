@@ -80,9 +80,29 @@ public class OnTapFragment extends Fragment {
                 mProgressBar.setVisibility(View.GONE);
                 ArrayList<OnTap> onTapItems = response.body().getOnTapItems();
                 if (onTapItems != null) {
-                    mOnTapItems.addAll(onTapItems);
+                    mOnTapItems.add(new OnTap(response.body().getHours(), OnTapAdapter.TYPE_HOURS));
 
-                    mAdapter.setHours(response.body().getHours());
+                    boolean containsCans = false;
+                    for (OnTap onTapItem : onTapItems) {
+                        if (onTapItem.getType() == OnTap.TYPE_CAN) {
+                            containsCans = true;
+                        }
+                    }
+
+                    if (containsCans) {
+                        mOnTapItems.add(new OnTap(getString(R.string.cans),
+                                OnTapAdapter.TYPE_HEADER));
+                    }
+
+                    boolean addedGrowlers = false;
+                    for (OnTap onTapItem : onTapItems) {
+                        if (!addedGrowlers && onTapItem.getType() == OnTap.TYPE_GROWLERS) {
+                            mOnTapItems.add(new OnTap(getString(R.string.growlers),
+                                    OnTapAdapter.TYPE_HEADER));
+                            addedGrowlers = true;
+                        }
+                        mOnTapItems.add(onTapItem);
+                    }
 
                     mAdapter.notifyDataSetChanged();
                 } else {

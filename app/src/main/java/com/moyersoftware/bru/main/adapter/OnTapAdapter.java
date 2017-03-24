@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.moyersoftware.bru.R;
 import com.moyersoftware.bru.main.data.OnTap;
+import com.moyersoftware.bru.util.Util;
 
 import java.util.ArrayList;
 
@@ -19,12 +20,12 @@ import butterknife.ButterKnife;
 
 public class OnTapAdapter extends RecyclerView.Adapter<OnTapAdapter.ViewHolder> {
 
-    private static final int TYPE_HOURS = 0;
-    private static final int TYPE_ITEM = 1;
+    public static final int TYPE_HOURS = 0;
+    public static final int TYPE_ITEM = 1;
+    public static final int TYPE_HEADER = 2;
 
     private final Context mContext;
     private ArrayList<OnTap> mOnTapItems;
-    private String mHours;
 
     public OnTapAdapter(Context context, ArrayList<OnTap> onTapsItems) {
         mContext = context;
@@ -34,47 +35,39 @@ public class OnTapAdapter extends RecyclerView.Adapter<OnTapAdapter.ViewHolder> 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate
-                (viewType == TYPE_ITEM ? R.layout.item_on_tap : R.layout.item_on_tap_hours,
+                (viewType == TYPE_ITEM ? R.layout.item_on_tap : (viewType == TYPE_HOURS
+                                ? R.layout.item_on_tap_hours : R.layout.item_on_tap_header),
                         parent, false));
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        OnTap onTapItem = mOnTapItems.get(position);
         if (getItemViewType(position) == TYPE_ITEM) {
             assert holder.mContent != null;
             assert holder.mPrice != null;
             assert holder.mAmount != null;
             assert holder.mText != null;
 
-            position = position - 1;
-
-            OnTap onTapItem = mOnTapItems.get(position);
             holder.mName.setText(onTapItem.getName());
             holder.mContent.setText(onTapItem.getContent());
             holder.mPrice.setText(onTapItem.getPrice());
             holder.mAmount.setText(onTapItem.getAmount());
             holder.mText.setText(onTapItem.getText());
         } else {
-            holder.mName.setText(mHours);
+            holder.mName.setText(onTapItem.getName());
         }
     }
 
     @Override
     public int getItemViewType(int position) {
-        return position == 0 ? TYPE_HOURS : TYPE_ITEM;
+        Util.Log("type = " + mOnTapItems.get(position).getAdapterType());
+        return mOnTapItems.get(position).getAdapterType();
     }
 
     @Override
     public int getItemCount() {
-        if (mOnTapItems.size() > 0) {
-            return mOnTapItems.size() + 1;
-        } else {
-            return 0;
-        }
-    }
-
-    public void setHours(String hours) {
-        mHours = hours;
+        return mOnTapItems.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

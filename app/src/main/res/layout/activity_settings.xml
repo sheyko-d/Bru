@@ -38,14 +38,13 @@
             android:paddingBottom="36dp">
 
             <TextView
-                fontPath="fonts/Roboto-Medium.ttf"
+                fontPath="fonts/Comfortaa-Bold.ttf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:text="@string/account"
-                android:textAllCaps="true"
                 android:textColor="@color/colorPrimary"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 tools:ignore="MissingPrefix" />
 
             <LinearLayout
@@ -208,14 +207,13 @@
             </LinearLayout>
 
             <TextView
-                fontPath="fonts/Roboto-Medium.ttf"
+                fontPath="fonts/Comfortaa-Bold.ttf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:text="@string/settings"
-                android:textAllCaps="true"
                 android:textColor="@color/colorPrimary"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 tools:ignore="MissingPrefix" />
 
             <LinearLayout
@@ -248,14 +246,13 @@
             </LinearLayout>
 
             <TextView
-                fontPath="fonts/Roboto-Medium.ttf"
+                fontPath="fonts/Comfortaa-Bold.ttf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:text="@string/support"
-                android:textAllCaps="true"
                 android:textColor="@color/colorPrimary"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 tools:ignore="MissingPrefix" />
 
             <LinearLayout

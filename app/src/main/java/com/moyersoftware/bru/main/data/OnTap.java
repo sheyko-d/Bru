@@ -11,29 +11,25 @@ public final class OnTap {
     public final static int TYPE_CAN = 1;
 
     @SerializedName("id")
-    private final String mId;
+    private String mId;
     @SerializedName("type")
-    private final int mType;
+    private int mType;
     @SerializedName("name")
-    private final String mName;
+    private String mName;
     @SerializedName("content")
-    private final String mContent;
+    private String mContent;
     @SerializedName("amount")
-    private final String mAmount;
+    private String mAmount;
     @SerializedName("price")
-    private final String mPrice;
+    private String mPrice;
     @SerializedName("text")
-    private final String mText;
+    private String mText;
+    @SerializedName("adapter_type")
+    private int mAdapterType;
 
-    public OnTap(String id, int type, String name, String content, String amount, String price,
-                 String text) {
-        mId = id;
-        mType = type;
+    public OnTap(String name, int adapterType) {
         mName = name;
-        mContent = content;
-        mAmount = amount;
-        mPrice = price;
-        mText = text;
+        mAdapterType = adapterType;
     }
 
     public String getId() {
@@ -42,6 +38,10 @@ public final class OnTap {
 
     public int getType() {
         return mType;
+    }
+
+    public int getAdapterType() {
+        return mAdapterType;
     }
 
     public String getName() {
