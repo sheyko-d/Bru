@@ -1,6 +1,7 @@
 package com.moyersoftware.bru.network;
 
 import com.moyersoftware.bru.main.data.NewsFeed;
+import com.moyersoftware.bru.main.data.OnTap;
 import com.moyersoftware.bru.user.model.Profile;
 
 import java.util.ArrayList;
@@ -43,6 +44,9 @@ public interface ApiService {
     @GET("news_feed/get_news_feed.php")
     Call<ArrayList<NewsFeed>> getNewsFeed();
 
+    @GET("on_tap/get_on_tap.php")
+    Call<ArrayList<OnTap>> getOnTap();
+
     @Multipart
     @POST("news_feed/add_post.php")
     Call<Void> addPost(@Part("text") String text,
@@ -55,4 +59,9 @@ public interface ApiService {
                              @Part("email") String email,
                              @Part("token") String token,
                              @Part MultipartBody.Part file);
+
+    @FormUrlEncoded
+    @POST("user/update_google_token.php")
+    Call<Void> updateGoogleToken(@Field("google_token") String googleToken,
+                                 @Field("token") String token);
 }

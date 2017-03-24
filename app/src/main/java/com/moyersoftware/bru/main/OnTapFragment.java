@@ -7,10 +7,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.moyersoftware.bru.R;
 import com.moyersoftware.bru.main.adapter.OnTapAdapter;
 import com.moyersoftware.bru.main.data.OnTap;
+import com.moyersoftware.bru.network.ApiFactory;
 import com.moyersoftware.bru.util.Util;
 import com.moyersoftware.bru.util.VerticalSpaceItemDecoration;
 
@@ -18,11 +21,16 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class OnTapFragment extends Fragment {
 
     @Bind(R.id.recycler)
     RecyclerView mRecycler;
+    @Bind(R.id.progress_bar)
+    ProgressBar mProgressBar;
 
     private OnTapAdapter mAdapter;
     private ArrayList<OnTap> mOnTapItems = new ArrayList<>();
@@ -42,9 +50,14 @@ public class OnTapFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         initRecycler();
-        loadItems();
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadItems();
     }
 
     private void initRecycler() {
@@ -55,9 +68,31 @@ public class OnTapFragment extends Fragment {
     }
 
     private void loadItems() {
-        mOnTapItems.add(new OnTap("1", OnTap.TYPE_CAN, "Alter Ego", "American IPA - 6.8% ABV ", "6 cans PP", "$3.80 / can", "What we did here is we took a whole bunch of Mosaic and Amarillo hops, a classic punch of citrus purveying goodnes."));
-        mOnTapItems.add(new OnTap("2", OnTap.TYPE_CAN, "GREEN", "American IPA - 7.5% ABV", "4 cans PP", "$3.80 / can", "Our cross-continental IPA! Made with Australian and American hops, this tropical heavy IPA opens up in the glass with notes"));
-        mOnTapItems.add(new OnTap("3", OnTap.TYPE_CAN, "LIGHTS ON", "American Pale Ale - 5.6% ABV", "2 cans PP ", "$3.30 / can ", "A modern American Pale Ale brewed to celebrate new beginnings in life, and in creative endeavour! Lights On pours"));
-        mAdapter.notifyDataSetChanged();
+        mOnTapItems.clear();
+        mProgressBar.setVisibility(View.VISIBLE);
+
+        Call<ArrayList<OnTap>> call = ApiFactory.getApiService().getOnTap();
+        call.enqueue(new Callback<ArrayList<OnTap>>() {
+            @Override
+            public void onResponse(Call<ArrayList<OnTap>> call,
+                                   Response<ArrayList<OnTap>> response) {
+                mProgressBar.setVisibility(View.GONE);
+                ArrayList<OnTap> onTapItems = response.body();
+                if (onTapItems != null) {
+                    mOnTapItems.addAll(onTapItems);
+                    mAdapter.notifyDataSetChanged();
+                } else {
+                    Toast.makeText(getActivity(), "Can't get the on tap beers.",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<OnTap>> call, Throwable t) {
+                mProgressBar.setVisibility(View.GONE);
+                Toast.makeText(getActivity(), "Can't get the on tap beers.",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

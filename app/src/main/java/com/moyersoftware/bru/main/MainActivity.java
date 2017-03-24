@@ -21,6 +21,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -30,6 +31,7 @@ import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.moyersoftware.bru.R;
 import com.moyersoftware.bru.addpost.AddPostActivity;
 import com.moyersoftware.bru.main.adapter.MainPagerAdapter;
@@ -46,6 +48,8 @@ import retrofit2.Response;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+
+    public static final String OPEN_ON_TAP_EXTRA = "OpenOnTap";
 
     @Bind(R.id.toolbar)
     Toolbar mToolbar;
@@ -80,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         initPager();
         initFab();
         initGoogleClient();
+        updateGoogleToken();
     }
 
     protected void onStop() {
@@ -166,6 +171,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             public void onPageScrollStateChanged(int state) {
             }
         });
+
+        if (getIntent().getBooleanExtra(OPEN_ON_TAP_EXTRA, false)) {
+            mPager.setCurrentItem(1);
+        }
     }
 
     private void updateTabStyle(int pos) {
@@ -319,5 +328,24 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+    }
+
+    private void updateGoogleToken() {
+        String googleToken = FirebaseInstanceId.getInstance().getToken();
+
+        if (TextUtils.isEmpty(googleToken)) return;
+
+        Call<Void> call = ApiFactory.getApiService().updateGoogleToken(googleToken,
+                Util.getProfile().getToken());
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call,
+                                   Response<Void> response) {
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+            }
+        });
     }
 }

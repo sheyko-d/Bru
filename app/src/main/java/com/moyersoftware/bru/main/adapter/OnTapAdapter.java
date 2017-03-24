@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.moyersoftware.bru.R;
 import com.moyersoftware.bru.main.data.OnTap;
@@ -62,6 +63,14 @@ public class OnTapAdapter extends RecyclerView.Adapter<OnTapAdapter.ViewHolder> 
         ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(mContext, "Clicking doesn't work yet \uD83D\uDE48", Toast.LENGTH_SHORT)
+                            .show();
+                }
+            });
         }
     }
 }

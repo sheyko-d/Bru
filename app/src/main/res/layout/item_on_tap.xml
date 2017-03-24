@@ -12,7 +12,6 @@
         fontPath="fonts/Roboto-Bold.ttf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAllCaps="true"
         android:textColor="@color/colorPrimary"
         android:textSize="16sp"
         tools:ignore="MissingPrefix"
