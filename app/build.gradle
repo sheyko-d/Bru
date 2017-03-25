@@ -7,8 +7,8 @@ android {
         applicationId "com.moyersoftware.bru"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 13
-        versionName "0.13"
+        versionCode 14
+        versionName '0.14'
     }
     buildTypes {
         release {
@@ -16,10 +16,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     //noinspection GradleCompatible
     compile 'com.android.support:appcompat-v7:25.3.0'
     compile 'com.android.support:design:25.3.0'
