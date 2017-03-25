@@ -225,24 +225,19 @@ public class SettingsActivity extends AppCompatActivity {
 
     public void onAboutButtonClicked(View view) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this, R.style.MaterialDialog);
+        @SuppressLint("InflateParams")
+        View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_about, null);
+        TextView aboutVersionTxt = (TextView) dialogView.findViewById(R.id.aboutVersionTxt);
         PackageInfo pInfo;
         try {
             pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
             String version = pInfo.versionName;
-            dialog.setTitle(getString(R.string.app_name) + " v" + version);
+            aboutVersionTxt.setText(version);
         } catch (PackageManager.NameNotFoundException e) {
-            dialog.setTitle(R.string.app_name);
+            aboutVersionTxt.setVisibility(View.GONE);
         }
-        dialog.setMessage("NORMAL HOURS: Wednesday 12-6 PM for Can Sales Only. Thursday" +
-                "& Friday 4 - 8 PM.  Saturday 11AM - 6PM for Cans & Growlers.\n" +
-                "\n" +
-                "This app is accurate to start retail hours and will ALWAYS be updated AS" +
-                "SOON AS BEER IS PACKAGED!\n" +
-                "\n" +
-                "ONCE OUR RETAIL HOURS BEGIN WE CANNOT GUARANTEE THAT THESE BEERS WILL BE" +
-                "AVAILABLE WHEN YOU ARRIVE!  LIMITS MAY BE ADJUSTED AT ANY TIME.\n" +
-                "\n" +
-                "Follow @treehousebrewco on Twitter for real time updates.");
+
+        dialog.setView(dialogView);
         dialog.setPositiveButton("Close", null);
         dialog.show();
     }

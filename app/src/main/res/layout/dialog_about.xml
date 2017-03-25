@@ -10,18 +10,20 @@
     android:paddingTop="16dp">
 
     <ImageView
-        android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:contentDescription="@null"
         app:srcCompat="@drawable/logo" />
 
     <TextView
+        fontPath="fonts/Comfortaa-Regular.ttf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
         android:textAlignment="center"
         android:textColor="@color/colorPrimary"
-        android:textSize="36sp" />
+        android:textSize="36sp"
+        tools:ignore="MissingPrefix" />
 
     <TextView
         android:id="@+id/aboutVersionTxt"
@@ -30,17 +32,14 @@
         android:textAlignment="center"
         android:textSize="14sp"
         android:textStyle="normal|bold"
-        tools:text="@string/about_version" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="30px" />
+        tools:text="1.0" />
 
     <TextView
         fontPath="fonts/Roboto-Medium.ttf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:layout_marginTop="8dp"
         android:lineSpacingExtra="2dp"
         android:text="@string/settings_about_affiliation"
         android:textAlignment="center"
