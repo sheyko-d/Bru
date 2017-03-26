@@ -90,12 +90,6 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        startActivity(new Intent(this, MainActivity.class));
-        super.onBackPressed();
-    }
-
     public void onLoginButtonClicked(View view) {
         if (TextUtils.isEmpty(mEmail.getText()) || TextUtils.isEmpty(mPassword.getText())) {
             Toast.makeText(this, "Not all fields are filled in.", Toast.LENGTH_SHORT).show();

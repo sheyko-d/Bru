@@ -2,6 +2,7 @@ package com.moyersoftware.bru.warning;
 
 import android.animation.ArgbEvaluator;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.moyersoftware.bru.R;
+import com.moyersoftware.bru.main.MainActivity;
 import com.moyersoftware.bru.util.Util;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -99,17 +101,13 @@ public class WarningActivity extends AppCompatActivity {
         });
     }
 
-    public void onNextPageClicked(View view) {
-        mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
-    }
-
     public void onSkipButtonClicked(View view) {
-        finish();
+        startActivity(new Intent(this, MainActivity.class));
     }
 
-    public class MyPagerAdapter extends FragmentPagerAdapter {
+    private class MyPagerAdapter extends FragmentPagerAdapter {
 
-        public MyPagerAdapter(FragmentManager fragmentManager) {
+        MyPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
         }
 

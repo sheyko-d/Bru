@@ -96,6 +96,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
         if (!Util.isTutorialShown()) {
             startActivity(new Intent(this, WarningActivity.class));
+            finish();
+        } else if (!Util.isLoggedIn()) {
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
         }
     }
 
