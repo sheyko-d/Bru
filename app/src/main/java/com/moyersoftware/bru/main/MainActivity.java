@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         updateGoogleToken();
         initAds();
 
-        if (!Util.isTutorialShown()) {
+        if (true || !Util.isTutorialShown()) {
             startActivity(new Intent(this, WarningActivity.class));
             finish();
         } else if (!Util.isLoggedIn()) {
