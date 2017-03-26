@@ -47,6 +47,7 @@ public class OnTapFragment extends Fragment {
 
     private OnTapAdapter mAdapter;
     private ArrayList<OnTap> mOnTapItems = new ArrayList<>();
+    private boolean mInitialLoad = true;
 
     public OnTapFragment() {
         // Required empty public constructor
@@ -124,8 +125,10 @@ public class OnTapFragment extends Fragment {
     }
 
     private void loadItems() {
-        mOnTapItems.clear();
-        mProgressBar.setVisibility(View.VISIBLE);
+        if (mInitialLoad) {
+            mProgressBar.setVisibility(View.VISIBLE);
+            mInitialLoad = false;
+        }
 
         Call<OnTapApi> call = ApiFactory.getApiService().getOnTap();
         call.enqueue(new Callback<OnTapApi>() {
@@ -137,6 +140,7 @@ public class OnTapFragment extends Fragment {
                 mProgressBar.setVisibility(View.GONE);
                 ArrayList<OnTap> onTapItems = response.body().getOnTapItems();
                 if (onTapItems != null) {
+                    mOnTapItems.clear();
                     if (onTapItems.size() == 0) {
                         mPlaceholder.setVisibility(View.VISIBLE);
                         mAdapter.notifyDataSetChanged();

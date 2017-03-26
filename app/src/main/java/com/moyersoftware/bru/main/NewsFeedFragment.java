@@ -34,6 +34,7 @@ public class NewsFeedFragment extends Fragment {
 
     private NewsFeedAdapter mAdapter;
     private ArrayList<NewsFeed> mNewsFeedItems = new ArrayList<>();
+    private boolean mInitialLoad = true;
 
     public NewsFeedFragment() {
         // Required empty public constructor
@@ -68,8 +69,10 @@ public class NewsFeedFragment extends Fragment {
     }
 
     private void loadItems() {
-        mNewsFeedItems.clear();
-        mProgressBar.setVisibility(View.VISIBLE);
+        if (mInitialLoad) {
+            mProgressBar.setVisibility(View.VISIBLE);
+            mInitialLoad = false;
+        }
 
         Call<ArrayList<NewsFeed>> call = ApiFactory.getApiService().getNewsFeed();
         call.enqueue(new Callback<ArrayList<NewsFeed>>() {
@@ -79,6 +82,7 @@ public class NewsFeedFragment extends Fragment {
                 mProgressBar.setVisibility(View.GONE);
                 ArrayList<NewsFeed> newsFeedItems = response.body();
                 if (newsFeedItems != null) {
+                    mNewsFeedItems.clear();
                     mNewsFeedItems.addAll(newsFeedItems);
                     mAdapter.notifyDataSetChanged();
                 } else {
