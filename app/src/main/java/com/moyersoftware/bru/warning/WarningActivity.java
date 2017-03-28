@@ -91,6 +91,7 @@ public class WarningActivity extends AppCompatActivity {
 
     public void onSkipButtonClicked(View view) {
         startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
 
     private class MyPagerAdapter extends FragmentPagerAdapter {
