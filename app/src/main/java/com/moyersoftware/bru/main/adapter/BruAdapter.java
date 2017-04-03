@@ -66,7 +66,7 @@ public class BruAdapter extends RecyclerView.Adapter<BruAdapter.ViewHolder> {
         } else {
             holder.mMyRating.setVisibility(View.GONE);
             holder.mRatingBar.setVisibility(View.VISIBLE);
-            holder.mRatingBar.setRating(bru.getRating());
+            holder.mRatingBar.setRating(0);
             if (bru.getRating() != 0) {
                 holder.mRating.setText(mFragment.getString(R.string.rating,
                         String.valueOf(bru.getRating())));
@@ -123,7 +123,7 @@ public class BruAdapter extends RecyclerView.Adapter<BruAdapter.ViewHolder> {
 
             mRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
                 @Override
-                public void onRatingChanged(RatingBar ratingBar, final float rating,
+                public void onRatingChanged(final RatingBar ratingBar, final float rating,
                                             boolean fromUser) {
                     if (!fromUser) return;
 
@@ -134,7 +134,13 @@ public class BruAdapter extends RecyclerView.Adapter<BruAdapter.ViewHolder> {
                     AlertDialog.Builder dialogBuilder = new AlertDialog.Builder
                             (mFragment.getActivity(), R.style.MaterialDialog);
                     dialogBuilder.setMessage("Rate this beer " + rating + " stars?");
-                    dialogBuilder.setNegativeButton("Cancel", null);
+                    dialogBuilder.setNegativeButton("Cancel", new DialogInterface
+                            .OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            ratingBar.setRating(0);
+                        }
+                    });
                     dialogBuilder.setPositiveButton("Rate", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
