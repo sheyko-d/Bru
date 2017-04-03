@@ -48,8 +48,14 @@ public interface ApiService {
     @GET("api/v1/on_tap/get_on_tap.php")
     Call<OnTapApi> getOnTap();
 
-    @GET("api/v1/bru/get_brus.php")
-    Call<ArrayList<Bru>> getBrus();
+    @FormUrlEncoded
+    @POST("api/v1/bru/get_brus.php")
+    Call<ArrayList<Bru>> getBrus(@Field("token") String token);
+
+    @FormUrlEncoded
+    @POST("api/v1/bru/rate_bru.php")
+    Call<Void> rateBru(@Field("token") String token, @Field("bru_id") String bruId,
+                       @Field("rating") Float rating);
 
     @FormUrlEncoded
     @POST("api/v1/news_feed/delete_news_feed_item.php")

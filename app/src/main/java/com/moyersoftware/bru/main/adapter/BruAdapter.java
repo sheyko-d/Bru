@@ -1,8 +1,8 @@
 package com.moyersoftware.bru.main.adapter;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +12,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.moyersoftware.bru.R;
+import com.moyersoftware.bru.main.BruFragment;
 import com.moyersoftware.bru.main.data.Bru;
 
 import java.util.ArrayList;
@@ -21,11 +22,13 @@ import butterknife.ButterKnife;
 
 public class BruAdapter extends RecyclerView.Adapter<BruAdapter.ViewHolder> {
 
-    private final Context mContext;
+    private final BruFragment mFragment;
     private ArrayList<Bru> mBrus;
+    private ArrayList<String> mSelectedItems = new ArrayList<>();
+    private ArrayList<String> mChangeRatingItems = new ArrayList<>();
 
-    public BruAdapter(Context context, ArrayList<Bru> brus) {
-        mContext = context;
+    public BruAdapter(BruFragment fragment, ArrayList<Bru> brus) {
+        mFragment = fragment;
         mBrus = brus;
     }
 
@@ -38,14 +41,44 @@ public class BruAdapter extends RecyclerView.Adapter<BruAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Bru bru = mBrus.get(position);
+        holder.mIcon.getDrawable().mutate().clearColorFilter();
         holder.mIcon.getDrawable().setColorFilter(Color.parseColor(bru.getColor()),
                 PorterDuff.Mode.SRC_ATOP);
         holder.mName.setText(bru.getName());
         holder.mContent.setText(bru.getContent());
         holder.mDescription.setText(bru.getDescription());
-        holder.mRating.setText(mContext.getString(R.string.rating,
-                String.valueOf(bru.getRating())));
-        holder.mRatingBar.setRating(bru.getRating());
+
+        if (mChangeRatingItems.contains(bru.getId())) {
+            holder.mRating.setText(mFragment.getString(R.string.rating,
+                    String.valueOf(bru.getRating())));
+            holder.mRating.setTypeface(null, Typeface.NORMAL);
+            holder.mRatingBar.setVisibility(View.VISIBLE);
+            holder.mRatingBar.setRating(bru.getMyRating());
+            holder.mMyRating.setVisibility(View.GONE);
+        } else if (bru.getMyRating() != null) {
+            holder.mMyRating.setVisibility(View.VISIBLE);
+            holder.mMyRating.setText(String.valueOf(bru.getMyRating()));
+            holder.mRatingBar.setVisibility(View.GONE);
+            holder.mRating.setText(R.string.change_rating);
+            holder.mRating.setTypeface(null, Typeface.ITALIC);
+        } else {
+            holder.mMyRating.setVisibility(View.GONE);
+            holder.mRatingBar.setVisibility(View.VISIBLE);
+            holder.mRatingBar.setRating(bru.getRating());
+            if (bru.getRating() != 0) {
+                holder.mRating.setText(mFragment.getString(R.string.rating,
+                        String.valueOf(bru.getRating())));
+            } else {
+                holder.mRating.setText(R.string.no_ratings);
+            }
+            holder.mRating.setTypeface(null, Typeface.NORMAL);
+        }
+
+        if (mSelectedItems.contains(bru.getId())) {
+            holder.mDescription.setMaxLines(Integer.MAX_VALUE);
+        } else {
+            holder.mDescription.setMaxLines(2);
+        }
     }
 
     @Override
@@ -65,12 +98,55 @@ public class BruAdapter extends RecyclerView.Adapter<BruAdapter.ViewHolder> {
         TextView mRating;
         @Bind(R.id.rating_bar)
         RatingBar mRatingBar;
+        @Bind(R.id.my_rating)
+        TextView mMyRating;
         @Bind(R.id.description)
         TextView mDescription;
 
         ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (mSelectedItems.contains(mBrus.get(getAdapterPosition()).getId())) {
+                        mSelectedItems.remove(mBrus.get(getAdapterPosition()).getId());
+                    } else {
+                        mSelectedItems.add(mBrus.get(getAdapterPosition()).getId());
+                    }
+                    notifyItemChanged(getAdapterPosition());
+                }
+            });
+
+            mRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+                @Override
+                public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                    if (!fromUser) return;
+
+                    if (mChangeRatingItems.contains(mBrus.get(getAdapterPosition()).getId())) {
+                        mChangeRatingItems.remove(mBrus.get(getAdapterPosition()).getId());
+                    }
+
+                    mFragment.rateBru(getAdapterPosition(), rating);
+                }
+            });
+
+            mRating.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (mBrus.get(getAdapterPosition()).getMyRating() == null) {
+                        return;
+                    }
+
+                    if (mChangeRatingItems.contains(mBrus.get(getAdapterPosition()).getId())) {
+                        mChangeRatingItems.remove(mBrus.get(getAdapterPosition()).getId());
+                    } else {
+                        mChangeRatingItems.add(mBrus.get(getAdapterPosition()).getId());
+                    }
+                    notifyItemChanged(getAdapterPosition());
+                }
+            });
         }
     }
 }

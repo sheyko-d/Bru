@@ -65,7 +65,7 @@ public class BruFragment extends Fragment {
     private void initRecycler() {
         mRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecycler.addItemDecoration(new VerticalSpaceItemDecoration(Util.convertDpToPixel(8)));
-        mAdapter = new BruAdapter(getActivity(), mBrus);
+        mAdapter = new BruAdapter(this, mBrus);
         mRecycler.setAdapter(mAdapter);
         ((SimpleItemAnimator) mRecycler.getItemAnimator()).setSupportsChangeAnimations(false);
     }
@@ -76,7 +76,8 @@ public class BruFragment extends Fragment {
             mInitialLoad = false;
         }
 
-        Call<ArrayList<Bru>> call = ApiFactory.getApiService().getBrus();
+        Call<ArrayList<Bru>> call = ApiFactory.getApiService().getBrus
+                (Util.getProfile().getToken());
         call.enqueue(new Callback<ArrayList<Bru>>() {
             @Override
             public void onResponse(Call<ArrayList<Bru>> call,
@@ -85,6 +86,7 @@ public class BruFragment extends Fragment {
 
                 mProgressBar.setVisibility(View.GONE);
                 ArrayList<Bru> brus = response.body();
+                mBrus.clear();
                 mBrus.addAll(brus);
                 mAdapter.notifyDataSetChanged();
             }
@@ -95,6 +97,26 @@ public class BruFragment extends Fragment {
                 Toast.makeText(getActivity(), "Can't get the brüs.",
                         Toast.LENGTH_SHORT).show();
                 mAdapter.notifyDataSetChanged();
+            }
+        });
+    }
+
+    public void rateBru(int pos, Float rating) {
+        Call<Void> call = ApiFactory.getApiService().rateBru
+                (Util.getProfile().getToken(), mBrus.get(pos).getId(), rating);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call,
+                                   Response<Void> response) {
+                Toast.makeText(getActivity(), "Thanks for your feedback!",
+                        Toast.LENGTH_SHORT).show();
+                loadItems();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(getActivity(), "Can't rate this beer.",
+                        Toast.LENGTH_SHORT).show();
             }
         });
     }

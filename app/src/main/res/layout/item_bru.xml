@@ -78,10 +78,25 @@
                     style="@style/BruRatingBar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginTop="10dp"
                     android:numStars="10"
-                    tools:rating="8.6"
-                    android:stepSize="0.1" />
+                    android:stepSize="0.1"
+                    tools:rating="8.6" />
+
+                <TextView
+                    android:id="@+id/my_rating"
+                    fontPath="fonts/Comfortaa-Regular.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8.5dp"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/orange"
+                    android:textSize="34sp"
+                    android:visibility="gone"
+                    tools:ignore="MissingPrefix"
+                    tools:text="6.5" />
             </LinearLayout>
         </LinearLayout>
 
@@ -89,9 +104,9 @@
             android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:ellipsize="end"
             android:lineSpacingExtra="4dp"
-            android:layout_marginTop="16dp"
             android:maxLines="2"
             android:textColor="@color/primary_text"
             android:textSize="14sp"
