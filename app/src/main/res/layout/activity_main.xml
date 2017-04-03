@@ -92,8 +92,8 @@
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
-                android:contentDescription="@null"
                 android:layout_height="wrap_content"
+                android:contentDescription="@null"
                 app:srcCompat="@drawable/logo" />
 
             <TextView
@@ -137,6 +137,23 @@
                 android:paddingRight="16dp"
                 android:paddingTop="8dp"
                 android:text="@string/on_tap"
+                android:textColor="@color/primary_text"
+                android:textSize="20sp"
+                tools:ignore="MissingPrefix" />
+
+            <TextView
+                android:id="@+id/drawer_brus"
+                fontPath="fonts/Comfortaa-Light.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="?selectableItemBackground"
+                android:clickable="true"
+                android:paddingBottom="8dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="8dp"
+                android:text="@string/brus"
                 android:textColor="@color/primary_text"
                 android:textSize="20sp"
                 tools:ignore="MissingPrefix" />

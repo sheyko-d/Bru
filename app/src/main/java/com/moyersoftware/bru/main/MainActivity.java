@@ -72,6 +72,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     View mDrawerNewsFeed;
     @Bind(R.id.drawer_on_tap)
     View mDrawerOnTap;
+    @Bind(R.id.drawer_brus)
+    View mDrawerBrus;
     @Bind(R.id.drawer_settings)
     View mDrawerSettings;
     @Bind(R.id.log_in)
@@ -260,6 +262,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             public void onClick(View view) {
                 mDrawerLayout.closeDrawers();
                 mPager.setCurrentItem(1);
+            }
+        });
+        mDrawerBrus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDrawerLayout.closeDrawers();
+                mPager.setCurrentItem(2);
             }
         });
 
