@@ -1,8 +1,10 @@
 package com.moyersoftware.bru.main.adapter;
 
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,7 +55,7 @@ public class BruAdapter extends RecyclerView.Adapter<BruAdapter.ViewHolder> {
                     String.valueOf(bru.getRating())));
             holder.mRating.setTypeface(null, Typeface.NORMAL);
             holder.mRatingBar.setVisibility(View.VISIBLE);
-            holder.mRatingBar.setRating(bru.getMyRating());
+            holder.mRatingBar.setRating(bru.getRating());
             holder.mMyRating.setVisibility(View.GONE);
         } else if (bru.getMyRating() != null) {
             holder.mMyRating.setVisibility(View.VISIBLE);
@@ -121,14 +123,25 @@ public class BruAdapter extends RecyclerView.Adapter<BruAdapter.ViewHolder> {
 
             mRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
                 @Override
-                public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                public void onRatingChanged(RatingBar ratingBar, final float rating,
+                                            boolean fromUser) {
                     if (!fromUser) return;
 
                     if (mChangeRatingItems.contains(mBrus.get(getAdapterPosition()).getId())) {
                         mChangeRatingItems.remove(mBrus.get(getAdapterPosition()).getId());
                     }
 
-                    mFragment.rateBru(getAdapterPosition(), rating);
+                    AlertDialog.Builder dialogBuilder = new AlertDialog.Builder
+                            (mFragment.getActivity(), R.style.MaterialDialog);
+                    dialogBuilder.setMessage("Rate this beer " + rating + " stars?");
+                    dialogBuilder.setNegativeButton("Cancel", null);
+                    dialogBuilder.setPositiveButton("Rate", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            mFragment.rateBru(getAdapterPosition(), rating);
+                        }
+                    });
+                    dialogBuilder.create().show();
                 }
             });
 
