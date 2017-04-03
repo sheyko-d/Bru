@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.moyersoftware.bru.R;
 import com.moyersoftware.bru.app.BruApp;
+import com.moyersoftware.bru.main.BruFragment;
 import com.moyersoftware.bru.main.NewsFeedFragment;
 import com.moyersoftware.bru.main.OnTapFragment;
 
@@ -22,8 +23,10 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         if (position == 0) {
             return NewsFeedFragment.newInstance();
-        } else {
+        } else if (position == 1) {
             return OnTapFragment.newInstance();
+        } else {
+            return BruFragment.newInstance();
         }
     }
 

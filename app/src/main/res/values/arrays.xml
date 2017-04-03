@@ -3,5 +3,6 @@
     <string-array name="main_tabs">
         <item>news feed</item>
         <item>on tap</item>
+        <item>brüs</item>
     </string-array>
 </resources>

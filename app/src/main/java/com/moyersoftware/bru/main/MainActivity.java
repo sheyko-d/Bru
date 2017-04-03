@@ -206,11 +206,14 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     private void updateTabStyle(int pos) {
         TextView tv = (TextView) (((LinearLayout) ((LinearLayout) mTabLayout.getChildAt(0))
-                .getChildAt(pos == 1 ? 1 : 0)).getChildAt(1));
-        tv.setTypeface(null, Typeface.BOLD);
+                .getChildAt(0)).getChildAt(1));
+        tv.setTypeface(null, pos == 0 ? Typeface.BOLD : Typeface.NORMAL);
         tv = (TextView) (((LinearLayout) ((LinearLayout) mTabLayout.getChildAt(0))
-                .getChildAt(pos == 1 ? 0 : 1)).getChildAt(1));
-        tv.setTypeface(null, Typeface.NORMAL);
+                .getChildAt(1)).getChildAt(1));
+        tv.setTypeface(null, pos == 1 ? Typeface.BOLD : Typeface.NORMAL);
+        tv = (TextView) (((LinearLayout) ((LinearLayout) mTabLayout.getChildAt(0))
+                .getChildAt(2)).getChildAt(1));
+        tv.setTypeface(null, pos == 2 ? Typeface.BOLD : Typeface.NORMAL);
     }
 
     /**

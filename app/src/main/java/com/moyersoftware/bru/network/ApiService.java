@@ -1,5 +1,6 @@
 package com.moyersoftware.bru.network;
 
+import com.moyersoftware.bru.main.data.Bru;
 import com.moyersoftware.bru.main.data.NewsFeed;
 import com.moyersoftware.bru.main.data.OnTapApi;
 import com.moyersoftware.bru.user.model.Profile;
@@ -44,13 +45,16 @@ public interface ApiService {
     @GET("api/v1/news_feed/get_news_feed.php")
     Call<ArrayList<NewsFeed>> getNewsFeed();
 
+    @GET("api/v1/on_tap/get_on_tap.php")
+    Call<OnTapApi> getOnTap();
+
+    @GET("api/v1/bru/get_brus.php")
+    Call<ArrayList<Bru>> getBrus();
+
     @FormUrlEncoded
     @POST("api/v1/news_feed/delete_news_feed_item.php")
     Call<Void> deleteNewsFeedItem(@Field("news_feed_id") String newsFeedId,
                                   @Field("token") String token);
-
-    @GET("api/v1/on_tap/get_on_tap.php")
-    Call<OnTapApi> getOnTap();
 
     @Multipart
     @POST("api/v1/news_feed/add_post.php")
