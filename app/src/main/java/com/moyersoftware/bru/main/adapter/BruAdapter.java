@@ -59,7 +59,7 @@ public class BruAdapter extends RecyclerView.Adapter<BruAdapter.ViewHolder> {
             holder.mMyRating.setVisibility(View.GONE);
         } else if (bru.getMyRating() != null) {
             holder.mMyRating.setVisibility(View.VISIBLE);
-            holder.mMyRating.setText(String.valueOf(bru.getMyRating()));
+            holder.mMyRating.setText(String.valueOf(bru.getRating()));
             holder.mRatingBar.setVisibility(View.GONE);
             holder.mRating.setText(R.string.change_rating);
             holder.mRating.setTypeface(null, Typeface.ITALIC);
