@@ -57,12 +57,16 @@ public class BruAdapter extends RecyclerView.Adapter<BruAdapter.ViewHolder> {
             holder.mRatingBar.setVisibility(View.VISIBLE);
             holder.mRatingBar.setRating(bru.getRating());
             holder.mMyRating.setVisibility(View.GONE);
+            holder.mVotes.setVisibility(View.GONE);
         } else if (bru.getMyRating() != null) {
             holder.mMyRating.setVisibility(View.VISIBLE);
             holder.mMyRating.setText(String.valueOf(bru.getRating()));
             holder.mRatingBar.setVisibility(View.GONE);
             holder.mRating.setText(R.string.change_rating);
             holder.mRating.setTypeface(null, Typeface.ITALIC);
+            holder.mVotes.setVisibility(View.VISIBLE);
+            holder.mVotes.setText(mFragment.getString(R.string.votes, bru.getVotes(),
+                    mFragment.getResources().getQuantityString(R.plurals.votes, bru.getVotes())));
         } else {
             holder.mMyRating.setVisibility(View.GONE);
             holder.mRatingBar.setVisibility(View.VISIBLE);
@@ -74,6 +78,7 @@ public class BruAdapter extends RecyclerView.Adapter<BruAdapter.ViewHolder> {
                 holder.mRating.setText(R.string.no_ratings);
             }
             holder.mRating.setTypeface(null, Typeface.NORMAL);
+            holder.mVotes.setVisibility(View.GONE);
         }
 
         if (mSelectedItems.contains(bru.getId())) {
@@ -102,6 +107,8 @@ public class BruAdapter extends RecyclerView.Adapter<BruAdapter.ViewHolder> {
         RatingBar mRatingBar;
         @Bind(R.id.my_rating)
         TextView mMyRating;
+        @Bind(R.id.votes)
+        TextView mVotes;
         @Bind(R.id.description)
         TextView mDescription;
 

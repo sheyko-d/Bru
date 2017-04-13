@@ -57,16 +57,16 @@ public interface ApiService {
     Call<Void> rateBru(@Field("token") String token, @Field("bru_id") String bruId,
                        @Field("rating") Float rating);
 
-    @FormUrlEncoded
-    @POST("api/v1/news_feed/delete_news_feed_item.php")
-    Call<Void> deleteNewsFeedItem(@Field("news_feed_id") String newsFeedId,
-                                  @Field("token") String token);
-
     @Multipart
     @POST("api/v1/news_feed/add_post.php")
     Call<Void> addPost(@Part("text") String text,
                        @Part("token") String token,
                        @Part MultipartBody.Part file);
+
+    @FormUrlEncoded
+    @POST("api/v1/news_feed/delete_news_feed_item.php")
+    Call<Void> deleteNewsFeedItem(@Field("news_feed_id") String newsFeedId,
+                                  @Field("token") String token);
 
     @Multipart
     @POST("api/v1/user/update_profile.php")

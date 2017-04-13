@@ -19,17 +19,20 @@ public final class Bru {
     private Float mRating;
     @SerializedName("my_rating")
     private Float mMyRating;
+    @SerializedName("votes")
+    private Integer mVotes;
     @SerializedName("color")
     private String mColor;
 
     public Bru(String id, String name, String content, String description, Float rating,
-               Float myRating, String color) {
+               Float myRating, Integer votes, String color) {
         mId = id;
         mName = name;
         mContent = content;
         mDescription = description;
         mRating = rating;
         mMyRating = myRating;
+        mVotes = votes;
         mColor = color;
     }
 
@@ -55,6 +58,10 @@ public final class Bru {
 
     public Float getMyRating() {
         return mMyRating;
+    }
+
+    public Integer getVotes() {
+        return mVotes;
     }
 
     public String getColor() {

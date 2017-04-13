@@ -84,19 +84,40 @@
                     android:stepSize="0.1"
                     tools:rating="4.6" />
 
-                <TextView
-                    android:id="@+id/my_rating"
-                    fontPath="fonts/Comfortaa-Regular.ttf"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="8.5dp"
-                    android:includeFontPadding="false"
-                    android:textColor="@color/orange"
-                    android:textSize="34sp"
-                    android:visibility="gone"
-                    tools:ignore="MissingPrefix"
-                    tools:text="4.5" />
+                    android:layout_gravity="center_horizontal">
+
+                    <TextView
+                        android:id="@+id/my_rating"
+                        fontPath="fonts/Comfortaa-Regular.ttf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:includeFontPadding="false"
+                        android:paddingTop="8.5dp"
+                        android:textColor="@color/orange"
+                        android:textSize="34sp"
+                        android:visibility="gone"
+                        tools:ignore="MissingPrefix"
+                        tools:text="4.5" />
+
+                    <TextView
+                        android:id="@+id/votes"
+                        fontPath="fonts/Comfortaa-Regular.ttf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginStart="4dp"
+                        android:paddingBottom="5dp"
+                        android:textColor="@color/secondary_text"
+                        android:textSize="12sp"
+                        android:visibility="gone"
+                        tools:ignore="MissingPrefix"
+                        tools:text="/ 2 votes" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
