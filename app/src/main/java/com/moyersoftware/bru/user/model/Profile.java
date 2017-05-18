@@ -65,4 +65,8 @@ public final class Profile {
     public void setPhoto(String photo) {
         this.mPhoto = photo;
     }
+
+    public void setToken(String token) {
+        mToken = token;
+    }
 }

@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "464012701134",
-    "firebase_url": "https://bru-app-f5b76.firebaseio.com",
-    "project_id": "bru-app-f5b76",
-    "storage_bucket": "bru-app-f5b76.appspot.com"
+    "project_number": "807941146652",
+    "firebase_url": "https://bru-app-7f001.firebaseio.com",
+    "project_id": "bru-app-7f001",
+    "storage_bucket": "bru-app-7f001.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:464012701134:android:8abfdc5529b65c24",
+        "mobilesdk_app_id": "1:807941146652:android:8abfdc5529b65c24",
         "android_client_info": {
           "package_name": "com.moyersoftware.bru"
         }
       },
       "oauth_client": [
         {
-          "client_id": "464012701134-on43a2co2viuo64cbckvhjkbvrg07vq3.apps.googleusercontent.com",
+          "client_id": "807941146652-hsdo9h4pbd3q91sftq469dmlh54mg0ln.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDjVIZlFTL5rL9iflz5iwwy3inBCFiONHo"
+          "current_key": "AIzaSyABMV_U-hkAiiF1OCPuJ8RXoLZ4Bym1j5A"
         }
       ],
       "services": {
