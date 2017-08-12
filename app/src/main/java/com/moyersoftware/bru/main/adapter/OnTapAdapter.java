@@ -3,6 +3,7 @@ package com.moyersoftware.bru.main.adapter;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,6 +60,15 @@ public class OnTapAdapter extends RecyclerView.Adapter<OnTapAdapter.ViewHolder> 
             holder.mPrice.setText(onTapItem.getPrice());
             holder.mAmount.setText(onTapItem.getAmount());
             holder.mText.setText(onTapItem.getText());
+
+            holder.mContent.setVisibility(TextUtils.isEmpty(onTapItem.getContent())
+                    ? View.GONE : View.VISIBLE);
+            holder.mPrice.setVisibility(TextUtils.isEmpty(onTapItem.getPrice())
+                    ? View.GONE : View.VISIBLE);
+            holder.mAmount.setVisibility(TextUtils.isEmpty(onTapItem.getAmount())
+                    ? View.GONE : View.VISIBLE);
+            holder.mText.setVisibility(TextUtils.isEmpty(onTapItem.getText())
+                    ? View.GONE : View.VISIBLE);
         } else if (getItemViewType(position) == TYPE_HOURS) {
             assert holder.mText != null;
             holder.mText.setText(onTapItem.getText());

@@ -152,7 +152,7 @@ public class OnTapFragment extends Fragment {
 
                     boolean containsCans = false;
                     for (OnTap onTapItem : onTapItems) {
-                        if (onTapItem.getType() == OnTap.TYPE_CAN) {
+                        if (onTapItem.getType() == OnTap.TYPE_CANS) {
                             containsCans = true;
                         }
                     }
@@ -163,11 +163,16 @@ public class OnTapFragment extends Fragment {
                     }
 
                     boolean addedGrowlers = false;
+                    boolean addedPints = false;
                     for (OnTap onTapItem : onTapItems) {
                         if (!addedGrowlers && onTapItem.getType() == OnTap.TYPE_GROWLERS) {
                             mOnTapItems.add(new OnTap(getString(R.string.growlers),
                                     OnTapAdapter.TYPE_HEADER));
                             addedGrowlers = true;
+                        } else if (!addedPints && onTapItem.getType() == OnTap.TYPE_PINTS) {
+                            mOnTapItems.add(new OnTap(getString(R.string.pints),
+                                    OnTapAdapter.TYPE_HEADER));
+                            addedPints = true;
                         }
                         mOnTapItems.add(onTapItem);
                     }
@@ -180,7 +185,7 @@ public class OnTapFragment extends Fragment {
                     mPlaceholder.setVisibility(View.VISIBLE);
                 }
 
-                if (mSwipeLayout.isRefreshing()){
+                if (mSwipeLayout.isRefreshing()) {
                     mSwipeLayout.setRefreshing(false);
                 }
             }
@@ -193,7 +198,7 @@ public class OnTapFragment extends Fragment {
                         Toast.LENGTH_SHORT).show();
                 mAdapter.notifyDataSetChanged();
 
-                if (mSwipeLayout.isRefreshing()){
+                if (mSwipeLayout.isRefreshing()) {
                     mSwipeLayout.setRefreshing(false);
                 }
             }

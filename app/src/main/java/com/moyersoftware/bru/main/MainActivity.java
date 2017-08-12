@@ -96,6 +96,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         updateGoogleToken();
         initAds();
 
+        Util.Log("Token: "+FirebaseInstanceId.getInstance().getToken());
+
         if (!Util.isTutorialShown()) {
             startActivity(new Intent(this, WarningActivity.class));
             finish();
