@@ -96,7 +96,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         updateGoogleToken();
         initAds();
 
-        Util.Log("Token: "+FirebaseInstanceId.getInstance().getToken());
+        if (Util.notificationsEnabled()) {
+            Util.Log("Token: " + FirebaseInstanceId.getInstance().getToken());
+        }
 
         if (!Util.isTutorialShown()) {
             startActivity(new Intent(this, WarningActivity.class));
@@ -378,6 +380,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     }
 
     private void updateGoogleToken() {
+        if (!Util.notificationsEnabled()) return;
+
         String googleToken = FirebaseInstanceId.getInstance().getToken();
 
         if (TextUtils.isEmpty(googleToken) || !Util.isLoggedIn()) return;

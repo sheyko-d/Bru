@@ -13,7 +13,7 @@ import retrofit2.Response;
 public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
     @Override
     public void onTokenRefresh() {
-        if (!Util.isLoggedIn()) return;
+        if (!Util.isLoggedIn() || !Util.notificationsEnabled()) return;
 
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
         updateFcmToken(refreshedToken);

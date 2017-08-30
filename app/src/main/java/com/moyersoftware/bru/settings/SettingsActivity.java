@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.moyersoftware.bru.R;
 import com.moyersoftware.bru.network.ApiFactory;
 import com.moyersoftware.bru.user.model.Profile;
@@ -81,7 +82,50 @@ public class SettingsActivity extends AppCompatActivity {
         notifications.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
+                notifications.setEnabled(false);
+
                 Util.setNotificationsEnabled(checked);
+
+                if (!checked) {
+                    Thread thread = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                FirebaseInstanceId.getInstance().deleteInstanceId();
+                            } catch (Exception e) {
+                                // Can't delete FCM token
+                            }
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    notifications.setEnabled(true);
+                                }
+                            });
+                        }
+                    });
+                    thread.start();
+                } else {
+                    updateGoogleToken(FirebaseInstanceId.getInstance().getToken());
+                }
+            }
+        });
+    }
+
+
+
+    private void updateGoogleToken(String googleToken) {
+        Call<Void> call = ApiFactory.getApiService().updateGoogleToken(googleToken,
+                Util.getProfile().getToken());
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call,
+                                   Response<Void> response) {
+                notifications.setEnabled(true);
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                notifications.setEnabled(true);
             }
         });
     }

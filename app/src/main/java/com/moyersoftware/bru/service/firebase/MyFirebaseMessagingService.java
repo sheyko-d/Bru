@@ -9,6 +9,7 @@ import android.support.v7.app.NotificationCompat;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.google.gson.Gson;
 import com.moyersoftware.bru.R;
 import com.moyersoftware.bru.main.MainActivity;
 import com.moyersoftware.bru.main.OnTapFragment;
@@ -24,8 +25,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
+        Util.Log("Received FCM message");
 
         try {
+            Util.Log("FCM message: "+new Gson().toJson(new JSONObject(remoteMessage.getData())));
             JSONObject message = new JSONObject(remoteMessage.getData());
             if (message.getString("type").equals(TYPE_ON_TAP_UPDATED)) {
                 sendBroadcast(new Intent(OnTapFragment.UPDATE_BEERS_INTENT));
