@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Bru.iml" filepath="$PROJECT_DIR$/Bru.iml" />
+      <module fileurl="file://C:\Dropbox\Projects\bru-Android\Bru.iml" filepath="C:\Dropbox\Projects\bru-Android\Bru.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Dropbox\Projects\bru-Android\app\app.iml" filepath="C:\Dropbox\Projects\bru-Android\app\app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bru-Android.iml" filepath="$PROJECT_DIR$/bru-Android.iml" />
     </modules>
   </component>
 </project>

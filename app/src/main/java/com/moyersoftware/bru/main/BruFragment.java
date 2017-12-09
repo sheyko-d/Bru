@@ -84,11 +84,15 @@ public class BruFragment extends Fragment {
                                    Response<ArrayList<Bru>> response) {
                 if (!isAdded()) return;
 
-                mProgressBar.setVisibility(View.GONE);
-                ArrayList<Bru> brus = response.body();
-                mBrus.clear();
-                mBrus.addAll(brus);
-                mAdapter.notifyDataSetChanged();
+                try {
+                    mProgressBar.setVisibility(View.GONE);
+                    ArrayList<Bru> brus = response.body();
+                    mBrus.clear();
+                    mBrus.addAll(brus);
+                    mAdapter.notifyDataSetChanged();
+                } catch (Exception e) {
+                    // Can't retrieve the beers
+                }
             }
 
             @Override

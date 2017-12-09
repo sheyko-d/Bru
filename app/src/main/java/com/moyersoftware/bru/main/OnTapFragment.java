@@ -194,6 +194,9 @@ public class OnTapFragment extends Fragment {
             public void onFailure(Call<OnTapApi> call, Throwable t) {
                 mProgressBar.setVisibility(View.GONE);
                 mPlaceholder.setVisibility(View.VISIBLE);
+
+                if (getActivity() == null) return;
+
                 Toast.makeText(getActivity(), "Can't get the on tap beers.",
                         Toast.LENGTH_SHORT).show();
                 mAdapter.notifyDataSetChanged();
