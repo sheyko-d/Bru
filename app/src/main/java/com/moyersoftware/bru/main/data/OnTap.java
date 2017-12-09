@@ -7,6 +7,7 @@ import com.google.gson.annotations.SerializedName;
  */
 public final class OnTap {
 
+    public final static int TYPE_DRAFT = -1;
     public final static int TYPE_PINTS = 0;
     public final static int TYPE_GROWLERS = 1;
     public final static int TYPE_CANS = 2;

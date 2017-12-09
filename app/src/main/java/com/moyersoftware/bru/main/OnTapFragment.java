@@ -164,6 +164,7 @@ public class OnTapFragment extends Fragment {
 
                     boolean addedGrowlers = false;
                     boolean addedPints = false;
+                    boolean addedDraft = false;
                     for (OnTap onTapItem : onTapItems) {
                         if (!addedGrowlers && onTapItem.getType() == OnTap.TYPE_GROWLERS) {
                             mOnTapItems.add(new OnTap(getString(R.string.growlers),
@@ -173,6 +174,10 @@ public class OnTapFragment extends Fragment {
                             mOnTapItems.add(new OnTap(getString(R.string.pints),
                                     OnTapAdapter.TYPE_HEADER));
                             addedPints = true;
+                        } else if (!addedDraft && onTapItem.getType() == OnTap.TYPE_DRAFT) {
+                            mOnTapItems.add(new OnTap(getString(R.string.draft),
+                                    OnTapAdapter.TYPE_HEADER));
+                            addedDraft = true;
                         }
                         mOnTapItems.add(onTapItem);
                     }
