@@ -4,8 +4,10 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 
+import com.crashlytics.android.answers.Answers;
 import com.moyersoftware.bru.R;
 
+import io.fabric.sdk.android.Fabric;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 public class BruApp extends Application {
@@ -15,6 +17,7 @@ public class BruApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Answers());
         sContext = this;
 
         // Init calligraphy library

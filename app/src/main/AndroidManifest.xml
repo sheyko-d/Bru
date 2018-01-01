@@ -59,6 +59,9 @@
             android:theme="@style/AppTheme.Dark" />
 
         <activity android:name=".warning.WarningActivity" />
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="43f362435ff9fc1d11e95af6f7d0c0b0a1fc15a8" />
     </application>
 
 </manifest>

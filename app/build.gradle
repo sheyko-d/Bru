@@ -1,4 +1,19 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+
 
 android {
     compileSdkVersion 26
@@ -7,8 +22,8 @@ android {
         applicationId "com.moyersoftware.bru"
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 32
-        versionName '1.1.10'
+        versionCode 34
+        versionName '1.1.12'
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -47,6 +62,9 @@ dependencies {
     compile 'com.google.firebase:firebase-messaging:11.0.1'
     compile 'com.google.firebase:firebase-ads:11.0.1'
     compile 'com.github.chrisbanes:PhotoView:2.0.0'
+    compile('com.crashlytics.sdk.android:answers:1.4.1@aar') {
+        transitive = true;
+    }
 }
 
 
