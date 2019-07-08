@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
@@ -33,7 +33,7 @@ import org.json.JSONObject;
 
 import java.util.Collections;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -42,11 +42,11 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class LoginActivity extends AppCompatActivity {
 
-    @Bind(R.id.sign_up)
+    @BindView(R.id.sign_up)
     TextView mSignUp;
-    @Bind(R.id.email)
+    @BindView(R.id.email)
     EditText mEmail;
-    @Bind(R.id.password)
+    @BindView(R.id.password)
     EditText mPassword;
 
     private CallbackManager mCallbackManager;
@@ -210,7 +210,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Profile> call, Throwable t) {
                 dlg.dismiss();
-                Toast.makeText(LoginActivity.this, "Can't log in with Facebook.",
+                Toast.makeText(LoginActivity.this, "Can't log in with Facebook: "+t.getMessage(),
                         Toast.LENGTH_SHORT).show();
             }
         });

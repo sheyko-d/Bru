@@ -4,8 +4,8 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.RecyclerView;
+import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +19,7 @@ import com.moyersoftware.bru.main.data.Bru;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class BruAdapter extends RecyclerView.Adapter<BruAdapter.ViewHolder> {
@@ -95,21 +95,21 @@ public class BruAdapter extends RecyclerView.Adapter<BruAdapter.ViewHolder> {
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.icon)
+        @BindView(R.id.icon)
         ImageView mIcon;
-        @Bind(R.id.name)
+        @BindView(R.id.name)
         TextView mName;
-        @Bind(R.id.content)
+        @BindView(R.id.content)
         TextView mContent;
-        @Bind(R.id.rating)
+        @BindView(R.id.rating)
         TextView mRating;
-        @Bind(R.id.rating_bar)
+        @BindView(R.id.rating_bar)
         RatingBar mRatingBar;
-        @Bind(R.id.my_rating)
+        @BindView(R.id.my_rating)
         TextView mMyRating;
-        @Bind(R.id.votes)
+        @BindView(R.id.votes)
         TextView mVotes;
-        @Bind(R.id.description)
+        @BindView(R.id.description)
         TextView mDescription;
 
         ViewHolder(View itemView) {

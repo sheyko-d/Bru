@@ -4,13 +4,15 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 
+import androidx.multidex.MultiDexApplication;
+
 import com.crashlytics.android.answers.Answers;
 import com.moyersoftware.bru.R;
 
 import io.fabric.sdk.android.Fabric;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
-public class BruApp extends Application {
+public class BruApp extends MultiDexApplication {
     @SuppressLint("StaticFieldLeak")
     private static Context sContext;
 

@@ -9,10 +9,13 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,7 +39,7 @@ import com.nguyenhoanglam.imagepicker.model.Image;
 import java.io.File;
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -48,15 +51,15 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar mToolbar;
-    @Bind(R.id.name)
+    @BindView(R.id.name)
     TextView mName;
-    @Bind(R.id.email)
+    @BindView(R.id.email)
     TextView mEmail;
-    @Bind(R.id.photo)
+    @BindView(R.id.photo)
     ImageView mPhoto;
-    @Bind(R.id.notifications)
+    @BindView(R.id.notifications)
     CheckBox notifications;
 
     private String mImagePath;
@@ -79,38 +82,26 @@ public class SettingsActivity extends AppCompatActivity {
                 .into(mPhoto);
 
         notifications.setChecked(Util.notificationsEnabled());
-        notifications.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
-                notifications.setEnabled(false);
+        notifications.setOnCheckedChangeListener((compoundButton, checked) -> {
+            notifications.setEnabled(false);
 
-                Util.setNotificationsEnabled(checked);
+            Util.setNotificationsEnabled(checked);
 
-                if (!checked) {
-                    Thread thread = new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                FirebaseInstanceId.getInstance().deleteInstanceId();
-                            } catch (Exception e) {
-                                // Can't delete FCM token
-                            }
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    notifications.setEnabled(true);
-                                }
-                            });
-                        }
-                    });
-                    thread.start();
-                } else {
-                    updateGoogleToken(FirebaseInstanceId.getInstance().getToken());
-                }
+            if (!checked) {
+                Thread thread = new Thread(() -> {
+                    try {
+                        FirebaseInstanceId.getInstance().deleteInstanceId();
+                    } catch (Exception e) {
+                        // Can't delete FCM token
+                    }
+                    runOnUiThread(() -> notifications.setEnabled(true));
+                });
+                thread.start();
+            } else {
+                updateGoogleToken(FirebaseInstanceId.getInstance().getToken());
             }
         });
     }
-
 
 
     private void updateGoogleToken(String googleToken) {
@@ -163,7 +154,7 @@ public class SettingsActivity extends AppCompatActivity {
         @SuppressLint("InflateParams") View dialogView = LayoutInflater.from(this)
                 .inflate(R.layout.dialog_edit_name, null);
         dialog.setTitle(R.string.edit_name);
-        final EditText name = (EditText) dialogView.findViewById(R.id.name);
+        final EditText name = dialogView.findViewById(R.id.name);
         name.setText(Util.getProfile().getName());
         name.setSelection(Util.getProfile().getName().length());
         dialog.setView(dialogView);
@@ -186,19 +177,16 @@ public class SettingsActivity extends AppCompatActivity {
         @SuppressLint("InflateParams") View dialogView = LayoutInflater.from(this)
                 .inflate(R.layout.dialog_edit_email, null);
         dialog.setTitle(R.string.edit_email);
-        final EditText email = (EditText) dialogView.findViewById(R.id.email);
+        final EditText email = dialogView.findViewById(R.id.email);
         email.setText(Util.getProfile().getEmail());
         email.setSelection(Util.getProfile().getEmail().length());
         dialog.setView(dialogView);
-        dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Profile profile = Util.getProfile();
-                profile.setEmail(email.getText().toString());
-                Util.setProfile(profile);
-                mEmail.setText(profile.getEmail());
-                updateProfile(profile);
-            }
+        dialog.setPositiveButton("OK", (dialogInterface, i) -> {
+            Profile profile = Util.getProfile();
+            profile.setEmail(email.getText().toString());
+            Util.setProfile(profile);
+            mEmail.setText(profile.getEmail());
+            updateProfile(profile);
         });
         dialog.setNegativeButton("Cancel", null);
         dialog.show();
@@ -271,7 +259,7 @@ public class SettingsActivity extends AppCompatActivity {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this, R.style.MaterialDialog);
         @SuppressLint("InflateParams")
         View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_about, null);
-        TextView aboutVersionTxt = (TextView) dialogView.findViewById(R.id.aboutVersionTxt);
+        TextView aboutVersionTxt = dialogView.findViewById(R.id.aboutVersionTxt);
         PackageInfo pInfo;
         try {
             pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);

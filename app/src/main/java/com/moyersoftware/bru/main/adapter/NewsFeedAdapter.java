@@ -3,8 +3,8 @@ package com.moyersoftware.bru.main.adapter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.RecyclerView;
+import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +22,7 @@ import com.moyersoftware.bru.util.Util;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -70,17 +70,17 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.ViewHo
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.user_photo)
+        @BindView(R.id.user_photo)
         ImageView mUserPhoto;
-        @Bind(R.id.user_name)
+        @BindView(R.id.user_name)
         TextView mUserName;
-        @Bind(R.id.text)
+        @BindView(R.id.text)
         TextView mText;
-        @Bind(R.id.location)
+        @BindView(R.id.location)
         TextView mLocation;
-        @Bind(R.id.image)
+        @BindView(R.id.image)
         ImageView mImage;
-        @Bind(R.id.time)
+        @BindView(R.id.time)
         TextView mTime;
 
         ViewHolder(View itemView) {

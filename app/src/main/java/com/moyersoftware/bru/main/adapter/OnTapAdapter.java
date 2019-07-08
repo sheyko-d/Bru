@@ -1,8 +1,8 @@
 package com.moyersoftware.bru.main.adapter;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +14,7 @@ import com.moyersoftware.bru.main.data.OnTap;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class OnTapAdapter extends RecyclerView.Adapter<OnTapAdapter.ViewHolder> {
@@ -90,19 +90,19 @@ public class OnTapAdapter extends RecyclerView.Adapter<OnTapAdapter.ViewHolder> 
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.name)
+        @BindView(R.id.name)
         TextView mName;
         @Nullable
-        @Bind(R.id.content)
+        @BindView(R.id.content)
         TextView mContent;
         @Nullable
-        @Bind(R.id.price)
+        @BindView(R.id.price)
         TextView mPrice;
         @Nullable
-        @Bind(R.id.amount)
+        @BindView(R.id.amount)
         TextView mAmount;
         @Nullable
-        @Bind(R.id.text)
+        @BindView(R.id.text)
         TextView mText;
 
         ViewHolder(View itemView) {

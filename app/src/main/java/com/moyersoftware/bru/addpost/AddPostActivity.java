@@ -4,9 +4,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,7 +27,7 @@ import com.nguyenhoanglam.imagepicker.model.Image;
 import java.io.File;
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -39,15 +39,15 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class AddPostActivity extends AppCompatActivity {
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar mToolbar;
-    @Bind(R.id.text)
+    @BindView(R.id.text)
     EditText mText;
-    @Bind(R.id.image)
+    @BindView(R.id.image)
     ImageView mImage;
-    @Bind(R.id.image_layout)
+    @BindView(R.id.image_layout)
     View mImageLayout;
-    @Bind(R.id.delete)
+    @BindView(R.id.delete)
     View mDelete;
 
     private String mImagePath;

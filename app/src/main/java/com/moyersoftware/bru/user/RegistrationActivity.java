@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
@@ -21,7 +21,7 @@ import com.moyersoftware.bru.network.ApiFactory;
 import com.moyersoftware.bru.user.model.Profile;
 import com.moyersoftware.bru.util.Util;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,15 +30,15 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class RegistrationActivity extends AppCompatActivity {
 
-    @Bind(R.id.sign_in)
+    @BindView(R.id.sign_in)
     TextView mSignIn;
-    @Bind(R.id.name)
+    @BindView(R.id.name)
     EditText mName;
-    @Bind(R.id.email)
+    @BindView(R.id.email)
     EditText mEmail;
-    @Bind(R.id.password)
+    @BindView(R.id.password)
     EditText mPassword;
-    @Bind(R.id.repeat_password)
+    @BindView(R.id.repeat_password)
     EditText mRepeatPassword;
 
     @Override

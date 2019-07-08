@@ -10,17 +10,17 @@ import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.viewpager.widget.ViewPager;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
@@ -46,7 +46,7 @@ import com.moyersoftware.bru.user.LoginActivity;
 import com.moyersoftware.bru.util.Util;
 import com.moyersoftware.bru.warning.WarningActivity;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -58,25 +58,25 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     public static final String OPEN_ON_TAP_EXTRA = "OpenOnTap";
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar mToolbar;
-    @Bind(R.id.drawer_layout)
+    @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
-    @Bind(R.id.pager)
+    @BindView(R.id.pager)
     ViewPager mPager;
-    @Bind(R.id.tab_layout)
+    @BindView(R.id.tab_layout)
     TabLayout mTabLayout;
-    @Bind(R.id.fab)
+    @BindView(R.id.fab)
     FloatingActionButton mFab;
-    @Bind(R.id.drawer_news_feed)
+    @BindView(R.id.drawer_news_feed)
     View mDrawerNewsFeed;
-    @Bind(R.id.drawer_on_tap)
+    @BindView(R.id.drawer_on_tap)
     View mDrawerOnTap;
-    @Bind(R.id.drawer_brus)
+    @BindView(R.id.drawer_brus)
     View mDrawerBrus;
-    @Bind(R.id.drawer_settings)
+    @BindView(R.id.drawer_settings)
     View mDrawerSettings;
-    @Bind(R.id.log_in)
+    @BindView(R.id.log_in)
     TextView mLogIn;
 
     private ActionBarDrawerToggle mDrawerToggle;

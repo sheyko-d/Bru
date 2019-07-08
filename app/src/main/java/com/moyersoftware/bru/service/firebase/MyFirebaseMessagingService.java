@@ -3,19 +3,25 @@ package com.moyersoftware.bru.service.firebase;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.support.v4.app.NotificationManagerCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.app.NotificationCompat;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.google.gson.Gson;
 import com.moyersoftware.bru.R;
 import com.moyersoftware.bru.main.MainActivity;
 import com.moyersoftware.bru.main.OnTapFragment;
+import com.moyersoftware.bru.network.ApiFactory;
 import com.moyersoftware.bru.util.Util;
 
 import org.json.JSONObject;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
@@ -70,5 +76,27 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         notification.defaults |= Notification.DEFAULT_VIBRATE;
         notification.defaults |= Notification.DEFAULT_SOUND;
         notificationManager.notify(ON_TAP_NOTIFICATION_ID, notification);
+    }
+
+    @Override
+    public void onNewToken(String refreshedToken) {
+        if (!Util.isLoggedIn() || !Util.notificationsEnabled()) return;
+
+        updateFcmToken(refreshedToken);
+    }
+
+    private void updateFcmToken(String refreshedToken) {
+        Call<Void> call = ApiFactory.getApiService().updateGoogleToken(refreshedToken,
+                Util.getProfile().getToken());
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call,
+                                   Response<Void> response) {
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+            }
+        });
     }
 }

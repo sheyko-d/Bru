@@ -1,10 +1,13 @@
 package com.moyersoftware.bru.main;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SimpleItemAnimator;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SimpleItemAnimator;
+
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +23,7 @@ import com.moyersoftware.bru.util.VerticalSpaceItemDecoration;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,9 +31,9 @@ import retrofit2.Response;
 
 public class BruFragment extends Fragment {
 
-    @Bind(R.id.recycler)
+    @BindView(R.id.recycler)
     RecyclerView mRecycler;
-    @Bind(R.id.progress_bar)
+    @BindView(R.id.progress_bar)
     ProgressBar mProgressBar;
 
     private BruAdapter mAdapter;
@@ -88,7 +91,13 @@ public class BruFragment extends Fragment {
                     mProgressBar.setVisibility(View.GONE);
                     ArrayList<Bru> brus = response.body();
                     mBrus.clear();
-                    mBrus.addAll(brus);
+                    if (brus != null) {
+                        for (Bru bru : brus) {
+                            if (!TextUtils.isEmpty(bru.getName())) {
+                                mBrus.add(bru);
+                            }
+                        }
+                    }
                     mAdapter.notifyDataSetChanged();
                 } catch (Exception e) {
                     // Can't retrieve the beers
