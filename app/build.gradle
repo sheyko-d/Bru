@@ -23,8 +23,8 @@ android {
         applicationId "com.moyersoftware.bru"
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 38
-        versionName '1.2.00'
+        versionCode 39
+        versionName '1.2.01'
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -58,7 +58,7 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
     implementation 'de.hdodenhof:circleimageview:3.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta2'
-    implementation 'com.facebook.android:facebook-android-sdk:5.1.1'
+    implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
     implementation 'com.squareup.retrofit2:retrofit:2.6.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.0.0'
