@@ -16,9 +16,9 @@
         app:srcCompat="@drawable/logo" />
 
     <TextView
-        fontPath="fonts/Comfortaa-Regular.ttf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/coustard"
         android:text="@string/app_name"
         android:textAlignment="center"
         android:textColor="@color/colorPrimary"
@@ -29,17 +29,18 @@
         android:id="@+id/aboutVersionTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/average_sans"
         android:textAlignment="center"
         android:textSize="14sp"
         android:textStyle="normal|bold"
         tools:text="1.0" />
 
     <TextView
-        fontPath="fonts/Roboto-Medium.ttf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/average_sans"
         android:lineSpacingExtra="2dp"
         android:text="@string/settings_about_affiliation"
         android:textAlignment="center"
@@ -49,10 +50,10 @@
         tools:ignore="MissingPrefix" />
 
     <TextView
-        fontPath="fonts/Roboto-Light.ttf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autoLink="web"
+        android:fontFamily="@font/average_sans"
         android:lineSpacingExtra="2dp"
         android:text="@string/settings_about_copyright"
         android:textAlignment="center"

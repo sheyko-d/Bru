@@ -14,9 +14,9 @@
 
         <TextView
             android:id="@+id/name"
-            fontPath="fonts/Roboto-Bold.ttf"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/coustard"
             android:textColor="@color/colorPrimary"
             android:textSize="16sp"
             tools:ignore="MissingPrefix"
@@ -30,10 +30,10 @@
 
             <TextView
                 android:id="@+id/content"
-                fontPath="fonts/Roboto-Medium.ttf"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/average_sans"
                 android:textColor="@color/primary_text"
                 android:textSize="14sp"
                 tools:ignore="MissingPrefix"
@@ -43,6 +43,7 @@
                 android:id="@+id/amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/average_sans"
                 android:textColor="@color/secondary_text"
                 android:textSize="14sp"
                 tools:ignore="MissingPrefix"
@@ -54,6 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
+            android:fontFamily="@font/average_sans"
             android:lineSpacingExtra="4dp"
             android:textColor="@color/secondary_text"
             android:textSize="14sp"
@@ -65,6 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:ellipsize="end"
+            android:fontFamily="@font/average_sans"
             android:lineSpacingExtra="4dp"
             android:maxLines="2"
             android:textColor="@color/primary_text"

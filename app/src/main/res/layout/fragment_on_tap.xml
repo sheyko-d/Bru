@@ -24,9 +24,9 @@
         tools:visibility="visible">
 
         <TextView
-            fontPath="fonts/Roboto-Light.ttf"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/average_sans"
             android:gravity="center_horizontal"
             android:text="@string/no_beers"
             android:textColor="@color/primary_text"
@@ -34,10 +34,10 @@
             tools:ignore="MissingPrefix" />
 
         <TextView
-            fontPath="fonts/Roboto-Regular.ttf"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            android:fontFamily="@font/average_sans"
             android:gravity="center_horizontal"
             android:text="@string/no_beers_desc"
             android:textColor="@color/secondary_text"

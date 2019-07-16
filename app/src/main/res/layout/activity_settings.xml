@@ -17,10 +17,10 @@
         tools:targetApi="lollipop">
 
         <TextView
-            fontPath="fonts/Comfortaa-Bold.ttf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:fontFamily="@font/coustard"
             android:text="@string/app_name"
             android:textColor="@android:color/white"
             android:textSize="28sp"
@@ -38,9 +38,9 @@
             android:paddingBottom="36dp">
 
             <TextView
-                fontPath="fonts/Comfortaa-Light.ttf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/average_sans"
                 android:padding="16dp"
                 android:text="@string/account"
                 android:textColor="@color/colorPrimary"
@@ -63,6 +63,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/average_sans"
                         android:text="@string/name"
                         android:textColor="@color/primary_text"
                         android:textSize="16sp" />
@@ -72,21 +73,22 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
+                        android:fontFamily="@font/average_sans"
                         android:textColor="@color/secondary_text"
                         android:textSize="14sp"
                         tools:text="Dmytro Sheiko" />
                 </LinearLayout>
 
                 <TextView
-                    fontPath="fonts/Roboto-Medium.ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:layout_marginBottom="2dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
+                    android:layout_marginBottom="2dp"
                     android:background="?selectableItemBackground"
                     android:clickable="true"
+                    android:fontFamily="@font/average_sans"
                     android:onClick="onEditNameButtonClicked"
                     android:padding="12dp"
                     android:text="@string/edit"
@@ -117,6 +119,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/average_sans"
                         android:text="@string/email"
                         android:textColor="@color/primary_text"
                         android:textSize="16sp" />
@@ -126,21 +129,22 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
+                        android:fontFamily="@font/average_sans"
                         android:textColor="@color/secondary_text"
                         android:textSize="14sp"
                         tools:text="dmytro@sheiko.net" />
                 </LinearLayout>
 
                 <TextView
-                    fontPath="fonts/Roboto-Medium.ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:layout_marginBottom="2dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
+                    android:layout_marginBottom="2dp"
                     android:background="?selectableItemBackground"
                     android:clickable="true"
+                    android:fontFamily="@font/average_sans"
                     android:onClick="onEditEmailButtonClicked"
                     android:padding="12dp"
                     android:text="@string/edit"
@@ -172,6 +176,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/average_sans"
                         android:text="@string/photo"
                         android:textColor="@color/primary_text"
                         android:textSize="16sp" />
@@ -188,15 +193,15 @@
 
                 <TextView
                     android:id="@+id/textView"
-                    fontPath="fonts/Roboto-Medium.ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginBottom="2dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
+                    android:layout_marginBottom="2dp"
                     android:background="?selectableItemBackground"
                     android:clickable="true"
+                    android:fontFamily="@font/average_sans"
                     android:onClick="onEditPhotoButtonClicked"
                     android:padding="12dp"
                     android:text="@string/edit"
@@ -207,9 +212,9 @@
             </LinearLayout>
 
             <TextView
-                fontPath="fonts/Comfortaa-Light.ttf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/average_sans"
                 android:padding="16dp"
                 android:text="@string/settings"
                 android:textColor="@color/colorPrimary"
@@ -227,6 +232,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/average_sans"
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
                     android:text="@string/notifications"
@@ -238,8 +244,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="9dp"
-                    android:layout_marginRight="9dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginRight="9dp"
+                    android:fontFamily="@font/average_sans"
                     android:padding="8dp"
                     android:text="@string/receive_notifications"
                     android:textColor="@color/primary_text"
@@ -247,9 +254,9 @@
             </LinearLayout>
 
             <TextView
-                fontPath="fonts/Comfortaa-Light.ttf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/average_sans"
                 android:padding="16dp"
                 android:text="@string/support"
                 android:textColor="@color/colorPrimary"
@@ -268,6 +275,7 @@
                     android:layout_height="wrap_content"
                     android:background="?selectableItemBackground"
                     android:clickable="true"
+                    android:fontFamily="@font/average_sans"
                     android:onClick="onRateButtonClicked"
                     android:padding="16dp"
                     android:text="@string/rate"
@@ -292,6 +300,7 @@
                     android:layout_height="wrap_content"
                     android:background="?selectableItemBackground"
                     android:clickable="true"
+                    android:fontFamily="@font/average_sans"
                     android:onClick="onAboutButtonClicked"
                     android:padding="16dp"
                     android:text="@string/about"

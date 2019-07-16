@@ -16,10 +16,10 @@
         android:paddingRight="36dp">
 
         <TextView
-            fontPath="fonts/Comfortaa-Bold.ttf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/coustard"
             android:text="@string/app_name"
             android:textColor="@android:color/white"
             android:textSize="48sp" />
@@ -33,68 +33,68 @@
             <EditText
                 android:id="@+id/name"
                 style="@style/EditText.Light"
-                fontPath="fonts/Roboto-Medium.ttf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
                 android:layout_marginTop="24dp"
+                android:layout_marginRight="4dp"
+                android:drawableStart="@drawable/login_name"
                 android:drawableLeft="@drawable/login_name"
                 android:drawablePadding="16dp"
-                android:drawableStart="@drawable/login_name"
+                android:fontFamily="@font/average_sans"
                 android:hint="@string/login_name"
                 android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/email"
                 style="@style/EditText.Light"
-                fontPath="fonts/Roboto-Medium.ttf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginRight="4dp"
+                android:drawableStart="@drawable/login_email"
                 android:drawableLeft="@drawable/login_email"
                 android:drawablePadding="16dp"
-                android:drawableStart="@drawable/login_email"
+                android:fontFamily="@font/average_sans"
                 android:hint="@string/login_email"
                 android:inputType="textEmailAddress" />
 
             <EditText
                 android:id="@+id/password"
                 style="@style/EditText.Light"
-                fontPath="fonts/Roboto-Medium.ttf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginRight="4dp"
+                android:drawableStart="@drawable/login_password"
                 android:drawableLeft="@drawable/login_password"
                 android:drawablePadding="16dp"
-                android:drawableStart="@drawable/login_password"
+                android:fontFamily="@font/average_sans"
                 android:hint="@string/login_password"
                 android:inputType="textPassword" />
 
             <EditText
                 android:id="@+id/repeat_password"
                 style="@style/EditText.Light"
-                fontPath="fonts/Roboto-Medium.ttf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginRight="4dp"
+                android:drawableStart="@drawable/login_password"
                 android:drawableLeft="@drawable/login_password"
                 android:drawablePadding="16dp"
-                android:drawableStart="@drawable/login_password"
+                android:fontFamily="@font/average_sans"
                 android:hint="@string/login_repeat_password"
                 android:inputType="textPassword" />
 
             <Button
-                fontPath="fonts/Roboto-Medium.ttf"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:layout_marginTop="16dp"
+                android:fontFamily="@font/average_sans"
                 android:onClick="onRegistrationButtonClicked"
                 android:stateListAnimator="@null"
                 android:text="@string/registration_submit"
@@ -120,9 +120,10 @@
         android:layout_marginTop="24dp"
         android:background="?selectableItemBackground"
         android:clickable="true"
+        android:fontFamily="@font/average_sans"
         android:gravity="center"
         android:onClick="onLoginButtonClicked"
         android:text="@string/log_in_account"
         android:textColor="@android:color/white"
-        android:textSize="14sp" />
+        android:textSize="16sp" />
 </FrameLayout>
