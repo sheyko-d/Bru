@@ -74,49 +74,6 @@ public class OnTapFragment extends Fragment {
 
         initRecycler();
         initSwipeLayout();
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "Bru updates";
-            String description = "On tap beer updates";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel("1", name, importance);
-            channel.setDescription(description);
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
-            NotificationManager notificationManager = getActivity().getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
-
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getActivity(), "1");
-        notificationBuilder.setContentTitle("On Tap beers updated!");
-        notificationBuilder.setContentText("Tap to see the list.");
-        notificationBuilder.setWhen(0);
-        notificationBuilder.setOnlyAlertOnce(true);
-        notificationBuilder.setAutoCancel(true);
-        notificationBuilder.setPriority(NotificationCompat.PRIORITY_HIGH);
-        notificationBuilder.setSmallIcon(R.drawable.notification_default);
-        notificationBuilder.setColor(ContextCompat.getColor(getActivity(), R.color.colorAccent));
-
-        Intent intent = new Intent(getActivity(), MainActivity.class);
-        intent.setAction(Long.toString(System.currentTimeMillis()));
-        intent.putExtra(MainActivity.OPEN_ON_TAP_EXTRA, true);
-        PendingIntent bookingsPendingIntent =
-                PendingIntent.getActivity(
-                        getActivity(),
-                        1,
-                        intent,
-                        PendingIntent.FLAG_UPDATE_CURRENT
-                );
-        notificationBuilder.setContentIntent(bookingsPendingIntent);
-
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from
-                (getActivity());
-        Notification notification = notificationBuilder.build();
-        notification.defaults |= Notification.DEFAULT_VIBRATE;
-        notification.defaults |= Notification.DEFAULT_SOUND;
-        notificationManager.notify(12, notification);
-        Toast.makeText(getActivity(), "Show notification", Toast.LENGTH_SHORT).show();
-
         return view;
     }
 
