@@ -38,9 +38,9 @@
 
                 <TextView
                     android:id="@+id/name"
-                    fontPath="fonts/Roboto-Bold.ttf"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/coustard"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp"
                     tools:ignore="MissingPrefix"
@@ -54,10 +54,10 @@
 
                     <TextView
                         android:id="@+id/content"
-                        fontPath="fonts/Roboto-Medium.ttf"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:fontFamily="@font/average_sans"
                         android:textColor="@color/primary_text"
                         android:textSize="14sp"
                         tools:ignore="MissingPrefix"
@@ -67,6 +67,7 @@
                         android:id="@+id/rating"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/average_sans"
                         android:textColor="@color/secondary_text"
                         android:textSize="14sp"
                         tools:ignore="MissingPrefix"
@@ -91,10 +92,10 @@
 
                     <TextView
                         android:id="@+id/my_rating"
-                        fontPath="fonts/Comfortaa-Regular.ttf"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/average_sans"
                         android:includeFontPadding="false"
                         android:paddingTop="8.5dp"
                         android:textColor="@color/orange"
@@ -105,12 +106,12 @@
 
                     <TextView
                         android:id="@+id/votes"
-                        fontPath="fonts/Comfortaa-Regular.ttf"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
-                        android:layout_marginLeft="4dp"
                         android:layout_marginStart="4dp"
+                        android:layout_marginLeft="4dp"
+                        android:fontFamily="@font/average_sans"
                         android:paddingBottom="5dp"
                         android:textColor="@color/secondary_text"
                         android:textSize="12sp"
@@ -127,6 +128,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:ellipsize="end"
+            android:fontFamily="@font/average_sans"
             android:lineSpacingExtra="4dp"
             android:maxLines="2"
             android:textColor="@color/primary_text"

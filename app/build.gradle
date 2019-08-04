@@ -23,8 +23,8 @@ android {
         applicationId "com.moyersoftware.bru"
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 34
-        versionName '1.1.12'
+        versionCode 39
+        versionName '1.2.01'
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -49,25 +49,25 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
+    implementation 'com.google.android.material:material:1.1.0-alpha08'
     implementation 'com.jakewharton:butterknife:10.1.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
     implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
-    implementation 'de.hdodenhof:circleimageview:2.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'com.facebook.android:facebook-android-sdk:5.1.1'
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta2'
+    implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
     implementation 'com.squareup.retrofit2:retrofit:2.6.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.0.0'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.google.android.gms:play-services-location:17.0.0'
     implementation 'com.github.nguyenhoanglam:ImagePicker:1.1.3'
-    implementation 'com.google.firebase:firebase-core:17.0.0'
+    implementation 'com.google.firebase:firebase-core:17.0.1'
     implementation 'com.google.firebase:firebase-messaging:19.0.1'
-    implementation 'com.google.firebase:firebase-ads:18.0.0'
+    implementation 'com.google.firebase:firebase-ads:18.1.0'
     implementation 'com.github.chrisbanes:PhotoView:2.0.0'
     implementation('com.crashlytics.sdk.android:answers:1.4.7@aar') {
         transitive = true;
