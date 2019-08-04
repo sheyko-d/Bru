@@ -1,8 +1,12 @@
 package com.moyersoftware.bru.service.firebase;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.os.Build;
+
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.app.NotificationCompat;
@@ -34,7 +38,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Util.Log("Received FCM message");
 
         try {
-            Util.Log("FCM message: "+new Gson().toJson(new JSONObject(remoteMessage.getData())));
+            Util.Log("FCM message: " + new Gson().toJson(new JSONObject(remoteMessage.getData())));
             JSONObject message = new JSONObject(remoteMessage.getData());
             if (message.getString("type").equals(TYPE_ON_TAP_UPDATED)) {
                 sendBroadcast(new Intent(OnTapFragment.UPDATE_BEERS_INTENT));
@@ -48,7 +52,19 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     }
 
     private void showBeersUpdatedNotification() {
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Bru updates";
+            String description = "On tap beer updates";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("1", name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, "1");
         notificationBuilder.setContentTitle("On Tap beers updated!");
         notificationBuilder.setContentText("Tap to see the list.");
         notificationBuilder.setWhen(0);
