@@ -19,6 +19,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SimpleItemAnimator;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -146,7 +147,14 @@ public class OnTapFragment extends Fragment {
                 if (!isAdded()) return;
 
                 mProgressBar.setVisibility(View.GONE);
-                ArrayList<OnTap> onTapItems = response.body().getOnTapItems();
+
+                OnTapApi body = response.body();
+                if (body == null) {
+                    Toast.makeText(getActivity(), "Can't get on tap beers.",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                ArrayList<OnTap> onTapItems = body.getOnTapItems();
                 if (onTapItems != null) {
                     mOnTapItems.clear();
                     if (onTapItems.size() == 0) {

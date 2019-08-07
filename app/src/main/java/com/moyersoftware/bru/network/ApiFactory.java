@@ -24,7 +24,7 @@ public class ApiFactory {
 
     private static final OkHttpClient CLIENT;
     private static final HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor
-            (new SystemLogger("API"));
+            (new SystemLogger("BruAPI"));
     private static Retrofit sRetrofit;
 
     static {
@@ -53,6 +53,7 @@ public class ApiFactory {
         if (sRetrofit == null) {
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
+
             sRetrofit = new Retrofit.Builder()
                     .baseUrl(Util.BASE_API_URL)
                     .addConverterFactory(GsonConverterFactory.create(gson))
